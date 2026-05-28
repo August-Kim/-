@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>글투 — 글로벌 투자 통합 대시보드</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --bg:        #ffffff;
+  --bg2:       #f7f6f2;
+  --border:    #e5e4de;
+  --text:      #1a1917;
+  --text2:     #5f5e5a;
+  --text3:     #98968f;
+  --up:        #1D9E75;
+  --down:      #D85A30;
+  --radius:    10px;
+  --font:      -apple-system, 'Noto Sans KR', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:    #1a1917;   --bg2:   #252420;
+    --border:#3a3936;   --text:  #f0ede8;
+    --text2: #a8a49d;   --text3: #6b6861;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 13px; }
+
+/* ── 레이아웃 ── */
+.container { max-width: 1100px; margin: 0 auto; padding: 20px 16px 40px; }
+header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 8px; }
+header h1 { font-size: 17px; font-weight: 600; }
+header h1 span { font-size: 12px; font-weight: 400; color: var(--text2); margin-left: 6px; }
+.updated { font-size: 11px; color: var(--text3); }
+.live-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--up); margin-right: 4px; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+/* ── 탭 ── */
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin-bottom: 16px; overflow-x: auto; }
+.tab { padding: 9px 16px; font-size: 12px; font-weight: 500; border: none; background: none; cursor: pointer; color: var(--text2); border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; font-family: var(--font); transition: color .15s; }
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--text); border-bottom-color: var(--up); }
+.panel { display: none; } .panel.active { display: block; }
+
+/* ── 카드·메트릭 ── */
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 9px; margin-bottom: 14px; }
+.metric { background: var(--bg2); border-radius: var(--radius); padding: 12px 14px; }
+.m-lbl { font-size: 11px; color: var(--text2); margin-bottom: 3px; }
+.m-val { font-size: 21px; font-weight: 600; }
+.m-sub { font-size: 11px; margin-top: 2px; }
+.up { color: var(--up); } .down { color: var(--down); } .neu { color: var(--text3); }
+.card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 12px; }
+.slbl { font-size: 10px; font-weight: 600; color: var(--text3); letter-spacing: .07em; text-transform: uppercase; margin-bottom: 10px; }
+
+/* ── 테이블 ── */
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 720px; }
+th { padding: 7px 8px; font-size: 10px; font-weight: 600; color: var(--text2); border-bottom: 1px solid var(--border); background: var(--bg2); text-align: center; white-space: nowrap; }
+th.tl { text-align: left; }
+td { padding: 6px 8px; border-bottom: 1px solid var(--border); font-size: 11px; text-align: center; white-space: nowrap; }
+td.tl { text-align: left; }
+tr:hover td { background: var(--bg2); }
+
+/* ── 배지 ── */
+.bdg { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+.bdg-red  { background: #FCEBEB; color: #791F1F; }
+.bdg-amb  { background: #FFF3CD; color: #633806; }
+.bdg-gry  { background: var(--bg2); color: var(--text2); border: 1px solid var(--border); }
+.bdg-blu  { background: #E6F1FB; color: #0C447C; }
+.bdg-tel  { background: #E1F5EE; color: #085041; }
+.bdg-drk  { background: #D3D1C7; color: #2C2C2A; }
+.bdg-kim  { background: #E1F5EE; color: #0F6E56; }
+.bdg-ykp  { background: #FAECE7; color: #993C1D; }
+
+/* ── 필터 ── */
+.frow { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 11px; align-items: center; }
+.frow select, .frow input { height: 30px; font-size: 11px; padding: 0 9px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-family: var(--font); }
+.frow input { width: 145px; }
+.fbtn { font-size: 11px; padding: 3px 10px; border: 1px solid var(--border); border-radius: 20px; background: transparent; cursor: pointer; color: var(--text2); font-family: var(--font); }
+.fbtn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+.cnt-lbl { font-size: 11px; color: var(--text3); margin-left: auto; }
+
+/* ── 통합분석 ── */
+.insight { background: var(--bg2); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 12px; font-size: 12px; line-height: 2; color: var(--text2); }
+.insight strong { color: var(--text); }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-bottom: 11px; }
+@media (max-width: 560px) { .two-col { grid-template-columns: 1fr; } }
+.stat-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+.stat-row:last-child { border-bottom: none; }
+.chart-wrap { position: relative; width: 100%; height: 200px; }
+
+/* ── 로딩 ── */
+#loading { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 280px; gap: 12px; color: var(--text2); }
+.spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--up); border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── 범례 ── */
+.legend { display: flex; gap: 8px; flex-wrap: wrap; padding: 8px 0 0; font-size: 10px; color: var(--text2); }
+.legend span { display: flex; align-items: center; gap: 3px; }
+
+/* ── 오류 ── */
+.error-box { background: #FCEBEB; border: 1px solid #F09595; border-radius: var(--radius); padding: 14px 16px; color: #791F1F; font-size: 12px; margin: 20px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>글투 <span>글로벌 투자 통합 대시보드 · NASDAQ 100 · KOSPI 500 · 무역통계</span></h1>
+    <span class="updated" id="updatedAt"><span class="live-dot"></span>데이터 로딩 중...</span>
+  </header>
+
+  <div id="loading"><div class="spinner"></div><span>최신 데이터 불러오는 중...</span></div>
+  <div id="app" style="display:none">
+    <div class="tabs">
+      <button class="tab active" onclick="sw('trade')">📦 무역통계</button>
+      <button class="tab" onclick="sw('ndx')">🇺🇸 NASDAQ 100</button>
+      <button class="tab" onclick="sw('ksp')">🇰🇷 KOSPI 500</button>
+      <button class="tab" onclick="sw('combo')">🔗 통합분석</button>
+    </div>
+
+    <!-- ── 무역통계 ── -->
+    <div id="p-trade" class="panel active">
+      <div class="metrics" id="tradeMetrics"></div>
+      <div class="two-col">
+        <div class="card"><div class="slbl">품목별 수출 증감 (YoY)</div><div id="tradeItems"></div></div>
+        <div class="card"><div class="slbl">국가별 수출 증감 (YoY)</div><div id="tradeCountries"></div></div>
+      </div>
+      <div class="card">
+        <div class="slbl">반도체 수출 비중 추이</div>
+        <div class="chart-wrap"><canvas id="tradeChart" role="img" aria-label="반도체 수출 비중 추이 차트"></canvas></div>
+      </div>
+      <div id="tradeInsight" class="insight"></div>
+    </div>
+
+    <!-- ── NASDAQ 100 ── -->
+    <div id="p-ndx" class="panel">
+      <div class="metrics" id="ndxMetrics"></div>
+      <div class="frow">
+        <input type="text" id="ndxSearch" placeholder="종목명·티커..." oninput="renderNdx()">
+        <select id="ndxSector" onchange="renderNdx()"><option value="">전체 섹터</option></select>
+        <button class="fbtn active" data-f="all"   onclick="ndxFilter(this)">전체</button>
+        <button class="fbtn" data-f="고평가"       onclick="ndxFilter(this)">고평가</button>
+        <button class="fbtn" data-f="약고평가"     onclick="ndxFilter(this)">약고평가</button>
+        <button class="fbtn" data-f="중립"         onclick="ndxFilter(this)">중립</button>
+        <button class="fbtn" data-f="저평가"       onclick="ndxFilter(this)">저평가</button>
+        <button class="fbtn" data-f="역프"         onclick="ndxFilter(this)">역프</button>
+        <span class="cnt-lbl" id="ndxCnt"></span>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>#</th><th>티커</th><th class="tl">종목명</th><th class="tl">섹터</th>
+            <th>PER</th><th>섹터PER</th><th>프리미엄율</th>
+            <th>FwdPER</th><th>섹터Fwd</th><th>Fwd프리미엄</th>
+            <th>현재판정</th><th>Fwd판정</th>
+          </tr></thead>
+          <tbody id="ndxBody"></tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <span><span class="bdg bdg-red">고평가</span>+50% 초과</span>
+        <span><span class="bdg bdg-amb">약고평가</span>+20~50%</span>
+        <span><span class="bdg bdg-gry">중립</span>-20~+20%</span>
+        <span><span class="bdg bdg-blu">저평가</span>-20~-50%</span>
+        <span><span class="bdg bdg-tel">역프</span>-50% 초과 할인</span>
+      </div>
+    </div>
+
+    <!-- ── KOSPI 500 ── -->
+    <div id="p-ksp" class="panel">
+      <div class="metrics" id="kspMetrics"></div>
+      <div class="frow">
+        <input type="text" id="kspSearch" placeholder="종목명·코드..." oninput="renderKsp()">
+        <select id="kspSector" onchange="renderKsp()"><option value="">전체 섹터</option></select>
+        <select id="kspSort" onchange="renderKsp()">
+          <option value="kimpo">김포율순</option>
+          <option value="fkimpo">Fwd 김포율순</option>
+          <option value="kr_per">한국PER순</option>
+        </select>
+        <span class="cnt-lbl" id="kspCnt"></span>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>코드</th><th class="tl">종목명</th><th class="tl">섹터</th><th>US기준</th>
+            <th>한국PER</th><th>미국PER</th><th>김포율</th>
+            <th>Fwd한국PER</th><th>Fwd미국PER</th><th>Fwd김포율</th>
+            <th>현재판정</th><th>Fwd판정</th>
+          </tr></thead>
+          <tbody id="kspBody"></tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <span><span class="bdg bdg-kim">김프</span>미국 대비 고평가</span>
+        <span><span class="bdg bdg-ykp">역프</span>미국 대비 저평가</span>
+        <span><span class="bdg bdg-gry">중립</span>유사 수준</span>
+        <span><span class="bdg bdg-drk">적자/무의미</span></span>
+      </div>
+    </div>
+
+    <!-- ── 통합분석 ── -->
+    <div id="p-combo" class="panel">
+      <div class="slbl" style="margin-bottom:10px">섹터별 무역동향 × NASDAQ × KOSPI 3중 매핑</div>
+      <div class="tbl-wrap" style="margin-bottom:12px">
+        <table style="min-width:660px">
+          <thead><tr>
+            <th class="tl">섹터</th><th>무역 신호</th>
+            <th>NASDAQ 대표</th><th>NASDAQ 판정</th>
+            <th>KOSPI 대표</th><th>KOSPI Fwd판정</th>
+            <th>종합 판단</th>
+          </tr></thead>
+          <tbody id="comboBody"></tbody>
+        </table>
+      </div>
+      <div class="slbl" style="margin-bottom:8px">투자 우선순위 스크리닝</div>
+      <div id="comboInsight" class="insight"></div>
+      <div class="card">
+        <div class="slbl">섹터별 수출증감률 vs Fwd PER 이중 축</div>
+        <div class="chart-wrap"><canvas id="comboChart" role="img" aria-label="수출증감률 대비 Fwd PER 차트"></canvas></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 유틸
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+const $ = id => document.getElementById(id);
+function fmtPer(v)  { return v ? `<strong>${v}</strong>` : `<span style="color:var(--text3)">—</span>`; }
+function fmtPrem(v) {
+  if (v == null) return `<span style="color:var(--text3)">—</span>`;
+  const cls = v > 0 ? "down" : v < 0 ? "up" : "neu";
+  return `<span class="${cls}">${v > 0 ? "+" : ""}${v}%</span>`;
+}
+function fmtKimpo(v) {
+  if (v == null) return `<span style="color:var(--text3)">—</span>`;
+  const cls = v > 0 ? "down" : "up";
+  return `<span class="${cls}">${v > 0 ? "+" : ""}${v}%</span>`;
+}
+function ndxBdg(j) {
+  const m = { "고평가":"bdg-red","약고평가":"bdg-amb","중립":"bdg-gry","저평가":"bdg-blu","역프":"bdg-tel","적자":"bdg-drk" };
+  return `<span class="bdg ${m[j]||'bdg-gry'}">${j}</span>`;
+}
+function kspBdg(v) {
+  if (!v || v === "N/A") return `<span class="bdg bdg-gry">—</span>`;
+  if (v === "김프") return `<span class="bdg bdg-kim">김프</span>`;
+  if (v === "역프") return `<span class="bdg bdg-ykp">역프</span>`;
+  if (v === "적자/무의미") return `<span class="bdg bdg-drk">적자</span>`;
+  return `<span class="bdg bdg-gry">${v}</span>`;
+}
+function tradeBdg(dir, label) {
+  return dir === "up"
+    ? `<span class="bdg bdg-kim">${label}</span>`
+    : `<span class="bdg bdg-ykp">${label}</span>`;
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 무역통계 렌더
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+function renderTrade(t) {
+  $("tradeMetrics").innerHTML = `
+    <div class="metric"><div class="m-lbl">수출 총액 (${t.period})</div><div class="m-val up">${t.export_total_usd_bn}억$</div><div class="m-sub up">▲ ${t.export_yoy_pct}% YoY · 역대 최대</div></div>
+    <div class="metric"><div class="m-lbl">반도체 수출</div><div class="m-val up">${t.semiconductor_usd_bn}억$</div><div class="m-sub up">▲ ${t.semiconductor_yoy_pct}% · 비중 ${t.semiconductor_share_pct}%</div></div>
+    <div class="metric"><div class="m-lbl">무역수지</div><div class="m-val up">+흑자</div><div class="m-sub up">${t.trade_balance_usd_bn}억$ 흑자</div></div>
+    <div class="metric"><div class="m-lbl">데이터 출처</div><div class="m-val" style="font-size:13px">${t.source === "customs_api" ? "🟢 실시간" : "🟡 공개치"}</div><div class="m-sub neu">${t.source === "customs_api" ? "관세청 UNI-PASS" : "관세청 보도자료"}</div></div>
+  `;
+  $("tradeItems").innerHTML = t.items.map(i =>
+    `<div class="stat-row"><span>${i.name}</span><span class="${i.direction === 'up' ? 'up' : 'down'}">${i.yoy > 0 ? "+" : ""}${i.yoy}%</span></div>`
+  ).join("");
+  $("tradeCountries").innerHTML = t.countries.map(c =>
+    `<div class="stat-row"><span>${c.name}</span><span class="${c.direction === 'up' ? 'up' : 'down'}">${c.yoy > 0 ? "+" : ""}${c.yoy}%</span></div>`
+  ).join("");
+  $("tradeInsight").innerHTML = `
+    🟢 <strong>AI 서버 수요</strong> — HBM·CoWoS 공급 부족으로 반도체 수출 역대 최대 경신 지속<br>
+    🟢 <strong>대만 수출 +${t.countries.find(c=>c.name==="대만")?.yoy||110.4}%</strong> — TSMC 설비 증설에 따른 소재·부품 공급망 수혜<br>
+    🔴 <strong>자동차 수출 ${t.items.find(i=>i.name==="승용차")?.yoy||"-10.1"}%</strong> — 미국 25% 관세 직격. 현대·기아 수출 감소 지속<br>
+    🟡 <strong>반도체 수출 비중 ${t.semiconductor_share_pct}%</strong> — 역대 최고 기록. 수출 구조 AI 중심 재편 가속
+  `;
+  // 반도체 비중 추이 차트
+  if (window._tradeChart) window._tradeChart.destroy();
+  window._tradeChart = new Chart($("tradeChart"), {
+    type: "line",
+    data: {
+      labels: t.semiconductor_trend.map(d => d.label),
+      datasets: [{ label: "반도체 수출 비중(%)", data: t.semiconductor_trend.map(d => d.pct),
+        borderColor: "#1D9E75", backgroundColor: "rgba(29,158,117,0.07)",
+        borderWidth: 2, fill: true, tension: 0.4, pointBackgroundColor: "#1D9E75", pointRadius: 4 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.y.toFixed(1) + "%" } } },
+      scales: { y: { min: 15, max: 50, ticks: { callback: v => v + "%", font: { size: 10 } }, grid: { color: "rgba(0,0,0,0.05)" } },
+                x: { ticks: { font: { size: 10 } }, grid: { display: false } } } }
+  });
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// NASDAQ 렌더
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+let _ndxData = [], _ndxFilter = "all";
+function ndxFilter(btn) {
+  document.querySelectorAll("#p-ndx .fbtn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  _ndxFilter = btn.dataset.f;
+  renderNdx();
+}
+function renderNdx() {
+  const q = $("ndxSearch").value.toLowerCase();
+  const sec = $("ndxSector").value;
+  const arr = _ndxData.filter(d => {
+    if (q && !d.name.toLowerCase().includes(q) && !d.ticker.toLowerCase().includes(q)) return false;
+    if (sec && d.sector !== sec) return false;
+    if (_ndxFilter !== "all" && d.judge !== _ndxFilter) return false;
+    return true;
+  });
+  $("ndxCnt").textContent = arr.length + "개 종목";
+  $("ndxBody").innerHTML = arr.map((d, i) => `
+    <tr>
+      <td style="color:var(--text3)">${i + 1}</td>
+      <td><strong>${d.ticker}</strong></td>
+      <td class="tl">${d.name}</td>
+      <td class="tl"><span style="font-size:10px;background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:2px 5px;color:var(--text2)">${d.sector}</span></td>
+      <td>${fmtPer(d.per)}</td>
+      <td style="color:var(--text2)">${d.sector_per || "—"}</td>
+      <td>${fmtPrem(d.premium)}</td>
+      <td>${fmtPer(d.fwd_per)}</td>
+      <td style="color:var(--text2)">${d.sector_fwd_per || "—"}</td>
+      <td>${fmtPrem(d.fwd_premium)}</td>
+      <td>${ndxBdg(d.judge)}</td>
+      <td>${ndxBdg(d.fwd_judge)}</td>
+    </tr>`).join("");
+
+  const hi = _ndxData.filter(d => d.judge === "고평가").length;
+  const lo = _ndxData.filter(d => d.judge === "저평가" || d.judge === "역프").length;
+  $("ndxMetrics").innerHTML = `
+    <div class="metric"><div class="m-lbl">NDX100 Trailing PER</div><div class="m-val">35.9x</div><div class="m-sub neu">지수 기준</div></div>
+    <div class="metric"><div class="m-lbl">NDX100 Forward PER</div><div class="m-val">24.3x</div><div class="m-sub neu">컨센서스 추정</div></div>
+    <div class="metric"><div class="m-lbl">고평가 종목</div><div class="m-val down">${hi}개</div><div class="m-sub down">섹터대비 +50% 초과</div></div>
+    <div class="metric"><div class="m-lbl">저평가·역프</div><div class="m-val up">${lo}개</div><div class="m-sub up">섹터대비 -20% 이상 할인</div></div>
+  `;
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// KOSPI 렌더
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+let _kspData = [];
+function renderKsp() {
+  const q = $("kspSearch").value.toLowerCase();
+  const sec = $("kspSector").value;
+  const sk = $("kspSort").value;
+  let arr = _kspData.filter(d => {
+    if (q && !d.name.toLowerCase().includes(q) && !d.code.includes(q)) return false;
+    if (sec && d.sector !== sec) return false;
+    return true;
+  }).sort((a, b) => (a[sk] ?? Infinity) - (b[sk] ?? Infinity));
+  $("kspCnt").textContent = arr.length + "개 종목";
+  $("kspBody").innerHTML = arr.map(d => `
+    <tr>
+      <td style="font-size:10px;color:var(--text3)">${d.code}</td>
+      <td class="tl"><strong>${d.name}</strong></td>
+      <td class="tl"><span style="font-size:10px;background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:2px 5px;color:var(--text2)">${d.sector}</span></td>
+      <td style="color:var(--text3);font-size:10px">${d.us_ref}</td>
+      <td>${fmtPer(d.kr_per)}</td>
+      <td style="color:var(--text2)">${d.us_per}</td>
+      <td>${fmtKimpo(d.kimpo)}</td>
+      <td>${fmtPer(d.kr_fwd)}</td>
+      <td style="color:var(--text2)">${d.us_fwd}</td>
+      <td>${fmtKimpo(d.fwd_kimpo)}</td>
+      <td>${kspBdg(d.judge)}</td>
+      <td>${kspBdg(d.fwd_judge)}</td>
+    </tr>`).join("");
+
+  const yk = _kspData.filter(d => d.judge === "역프").length;
+  const km = _kspData.filter(d => d.judge === "김프").length;
+  $("kspMetrics").innerHTML = `
+    <div class="metric"><div class="m-lbl">역프 종목 (저평가)</div><div class="m-val up">${yk}개</div><div class="m-sub down">미국 대비 저평가</div></div>
+    <div class="metric"><div class="m-lbl">김프 종목 (고평가)</div><div class="m-val down">${km}개</div><div class="m-sub up">미국 대비 고평가</div></div>
+    <div class="metric"><div class="m-lbl">분석 종목 수</div><div class="m-val">${_kspData.length}</div><div class="m-sub neu">KOSPI 500 상위</div></div>
+    <div class="metric"><div class="m-lbl">데이터 소스</div><div class="m-val" style="font-size:13px">🟢 실시간</div><div class="m-sub neu">yfinance 자동 수집</div></div>
+  `;
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 통합분석 렌더
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+function renderCombo(t) {
+  const comboRows = [
+    { sector: "메모리/HBM",     tradeLabel: `수출 +${t.semiconductor_yoy_pct}%`, tradeDir:"up",  ndxName:"MU (마이크론)",        ndxJ:"중립",   kspName:"삼성전자·SK하이닉스", kspJ:"역프", overall:"bdg-kim", oLabel:"⭐ 최우선 관심" },
+    { sector: "AI반도체",       tradeLabel: "AI인프라 수혜",                    tradeDir:"up",  ndxName:"NVDA·AVGO·AMD",        ndxJ:"약고평가",kspName:"SK스퀘어",           kspJ:"역프", overall:"bdg-amb", oLabel:"관심 (미국 고평가 주의)" },
+    { sector: "반도체장비",     tradeLabel: "수입 +129.7%",                     tradeDir:"up",  ndxName:"AMAT·LRCX·KLAC",       ndxJ:"중립",   kspName:"—",                  kspJ:"—",   overall:"bdg-gry", oLabel:"중립 관찰" },
+    { sector: "전력기기/전력망",tradeLabel: "AI인프라 수혜",                    tradeDir:"up",  ndxName:"—",                    ndxJ:"—",      kspName:"LS ELECTRIC·HD현대일렉트릭",kspJ:"김프",overall:"bdg-red",oLabel:"⚠ 고평가 과열" },
+    { sector: "자동차/EV",      tradeLabel: `수출 ${t.items.find(i=>i.name==="승용차")?.yoy||"-10.1"}%`,tradeDir:"down",ndxName:"TSLA",ndxJ:"고평가", kspName:"현대차·기아·현대모비스",kspJ:"역프",overall:"bdg-ykp",oLabel:"⛔ 무역·밸류 이중 약세" },
+    { sector: "클라우드/AI SW", tradeLabel: "내수 중심",                        tradeDir:"neu", ndxName:"MSFT·AMZN·META",       ndxJ:"중립",   kspName:"NAVER",               kspJ:"역프", overall:"bdg-gry", oLabel:"중립" },
+  ];
+  $("comboBody").innerHTML = comboRows.map(r => `
+    <tr>
+      <td class="tl"><strong>${r.sector}</strong></td>
+      <td>${tradeBdg(r.tradeDir, r.tradeLabel)}</td>
+      <td style="font-size:11px">${r.ndxName}</td>
+      <td>${r.ndxJ !== "—" ? ndxBdg(r.ndxJ) : "—"}</td>
+      <td style="font-size:11px">${r.kspName}</td>
+      <td>${r.kspJ !== "—" ? kspBdg(r.kspJ) : "—"}</td>
+      <td><span class="bdg ${r.overall}">${r.oLabel}</span></td>
+    </tr>`).join("");
+
+  $("comboInsight").innerHTML = `
+    🥇 <strong>SK하이닉스 (000660)</strong> — 반도체 수출 +${t.semiconductor_yoy_pct}% 직접 수혜 / Fwd 역프 / HBM3E 독점 공급<br>
+    🥇 <strong>삼성전자 (005930)</strong> — 반도체 수출 최대 수혜 / Fwd 역프 / HBM4 전환 모멘텀<br>
+    🥈 <strong>마이크론 NASDAQ (MU)</strong> — Fwd PER 12x · 섹터 대비 저평가 / HBM 공급망 직접 편입<br>
+    🥈 <strong>AMAT · LRCX</strong> — 한국 반도체장비 수입 +129.7% 수혜 / 중립 구간<br>
+    ⚠️ <strong>LS ELECTRIC · 두산에너빌리티</strong> — 전력망 수혜 확실하나 Fwd 김포율 +150% 이상 과열<br>
+    ⚠️ <strong>TSLA · 현대차·기아</strong> — 미국 관세 직격 + TSLA PER 과열. 관망 유지<br>
+    ❌ <strong>팔란티어 (PLTR)</strong> — AI 테마 수혜 기대에도 PER 250x. 리스크 극단적
+  `;
+
+  // 이중 축 차트
+  if (window._comboChart) window._comboChart.destroy();
+  window._comboChart = new Chart($("comboChart"), {
+    data: {
+      labels: ["메모리/HBM","AI반도체","반도체장비","전력기기","방산/항공","자동차/EV","클라우드SW"],
+      datasets: [
+        { type:"bar",  label:"수출 증감률 (%)", data:[202,180,129,80,5,-10,0],
+          backgroundColor:["#1D9E75","#1D9E75","#1D9E75","#5DCAA5","#B4B2A9","#D85A30","#B4B2A9"],
+          yAxisID:"y", borderRadius:3 },
+        { type:"line", label:"평균 Fwd PER", data:[8.1,25.7,17.0,78.0,18.0,150.0,28.0],
+          borderColor:"#3266ad", backgroundColor:"transparent",
+          borderWidth:2, pointRadius:4, pointBackgroundColor:"#3266ad", yAxisID:"y2" }
+      ]
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false }, tooltip:{ mode:"index", intersect:false } },
+      scales:{
+        y:  { position:"left",  title:{display:true,text:"수출 증감률 (%)",font:{size:10}}, ticks:{font:{size:10}} },
+        y2: { position:"right", title:{display:true,text:"Fwd PER",font:{size:10}},       ticks:{font:{size:10},color:"#3266ad"}, grid:{drawOnChartArea:false} }
+      } }
+  });
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 탭 전환
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+const tabIds = ["trade","ndx","ksp","combo"];
+function sw(id) {
+  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach((t, i) => t.classList.toggle("active", tabIds[i] === id));
+  $("p-" + id).classList.add("active");
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 드롭다운 채우기
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+function _populateSelect(elId, items) {
+  const el = $(elId);
+  [...new Set(items)].sort().forEach(s => {
+    const o = document.createElement("option");
+    o.value = o.textContent = s;
+    el.appendChild(o);
+  });
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 메인 — latest.json 로드 후 전체 렌더
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+async function init() {
+  try {
+    // GitHub Pages 경로: ./data/latest.json
+    const res = await fetch("./data/latest.json?t=" + Date.now());
+    if (!res.ok) throw new Error("데이터 파일을 찾을 수 없습니다.");
+    const data = await res.json();
+
+    _ndxData = data.nasdaq || [];
+    _kspData = data.kospi  || [];
+    const trade = data.trade || {};
+
+    // 드롭다운 채우기
+    _populateSelect("ndxSector", _ndxData.map(d => d.sector));
+    _populateSelect("kspSector", _kspData.map(d => d.sector));
+
+    // 렌더
+    renderTrade(trade);
+    renderNdx();
+    renderKsp();
+    renderCombo(trade);
+
+    // 타임스탬프
+    $("updatedAt").innerHTML = `<span class="live-dot"></span>최종 업데이트: ${data.updated_at || "—"}`;
+    $("loading").style.display = "none";
+    $("app").style.display = "block";
+
+  } catch (err) {
+    $("loading").innerHTML = `<div class="error-box">⚠️ 데이터 로딩 실패: ${err.message}<br><small>GitHub Actions가 아직 실행 전이거나 data/latest.json이 없을 수 있습니다.<br>scripts/collect_data.py를 먼저 실행해주세요.</small></div>`;
+  }
+}
+
+init();
+</script>
+</body>
+</html>
