@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-05-30 17:42 KST",
+  "updated_at": "2026-05-31 18:50 KST",
   "nasdaq": [
     {
       "ticker": "NVDA",
@@ -461,9 +461,9 @@
       "kr_per": null,
       "us_per": 42.1,
       "kimpo": null,
-      "kr_fwd": 5.9,
+      "kr_fwd": 5.7,
       "us_fwd": 9.6,
-      "fwd_kimpo": -38.2,
+      "fwd_kimpo": -40.2,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 317000.0
