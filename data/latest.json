@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-06 18:12 KST",
+  "updated_at": "2026-06-07 19:12 KST",
   "nasdaq": [
     {
       "ticker": "NVDA",
@@ -506,7 +506,7 @@
       "kr_per": null,
       "us_per": 421.7,
       "kimpo": null,
-      "kr_fwd": 14.1,
+      "kr_fwd": 14.2,
       "us_fwd": 201.6,
       "fwd_kimpo": -93.0,
       "judge": "적자/무의미",
