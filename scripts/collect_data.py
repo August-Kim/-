@@ -297,6 +297,82 @@ def _latest_available_month():
     return f"{year}{month:02d}", f"{year-1}{month:02d}"
 
 
+def _fetch_grand_total(api_key, yymm):
+    """hsSgn 없이 호출 → 전체 수출 총액 조회 (반도체 비중 계산용 분모)"""
+    params = {
+        "serviceKey": api_key,
+        "strtYymm": yymm, "endYymm": yymm,
+    }
+    try:
+        resp = requests.get(CUSTOMS_URL, params=params, timeout=15)
+        resp.raise_for_status()
+        root = ET.fromstring(resp.content)
+        if root.findtext(".//resultCode") not in ("00", None):
+            return None
+        # year=총계 행에서 전체 수출액 추출
+        for item in root.findall(".//item"):
+            if item.findtext("year") == "총계":
+                return int(item.findtext("expDlr") or 0)
+    except Exception as e:
+        print(f"    ⚠ 전체 총액 조회 오류: {e}")
+    return None
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 국가별 수출입실적 (공공데이터포털) — 국가별 YoY 자동화
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+COUNTRY_URL = "https://apis.data.go.kr/1220000/nationtrade/getNationtradeList"
+
+# 글투 국가 → 관세청 국가코드(ISO 2자리)
+COUNTRY_CD_MAP = [
+    ("대만",   "TW"),
+    ("중국",   "CN"),
+    ("미국",   "US"),
+    ("베트남", "VN"),
+    ("일본",   "JP"),
+]
+
+def _fetch_country_total(api_key, cnty_cd, yymm):
+    """특정 국가·특정월 수출액 조회 → 수출$ 또는 None"""
+    params = {
+        "serviceKey": api_key,
+        "strtYymm": yymm, "endYymm": yymm,
+        "cntyCd": cnty_cd,
+    }
+    try:
+        resp = requests.get(COUNTRY_URL, params=params, timeout=15)
+        resp.raise_for_status()
+        root = ET.fromstring(resp.content)
+        if root.findtext(".//resultCode") not in ("00", None):
+            return None
+        # 단일 국가 조회 → 첫 item에서 수출액 추출
+        item = root.find(".//item")
+        if item is not None:
+            return int(item.findtext("expDlr") or 0)
+    except Exception as e:
+        print(f"    ⚠ {cnty_cd} {yymm} 조회 오류: {e}")
+    return None
+
+def _collect_countries(api_key, cur_ym, prev_ym):
+    """국가별 수출 YoY 수집 → 리스트 또는 None(실패 시)"""
+    countries = []
+    for name, cd in COUNTRY_CD_MAP:
+        cur = _fetch_country_total(api_key, cd, cur_ym)
+        prev = _fetch_country_total(api_key, cd, prev_ym)
+        if cur is None:
+            print(f"    ⚠ {name}({cd}) 데이터 없음, 건너뜀")
+            continue
+        yoy = _yoy(cur, prev)
+        countries.append({
+            "name": name,
+            "yoy": yoy if yoy is not None else 0,
+            "direction": "up" if (yoy or 0) >= 0 else "down",
+        })
+        print(f"    ✅ {name}: 수출 ${cur/1e8:.1f}억 (YoY {yoy}%)")
+    return countries if countries else None
+
+
 def collect_trade():
     """무역통계 수집 — wrapper. API 성공 시 실시간, 실패 시 fallback"""
     print("📡 무역통계 수집 중 (관세청 품목별 API)...")
@@ -337,12 +413,24 @@ def collect_trade():
         print("  ⚠ 전 품목 실패 → fallback 사용")
         return TRADE_FALLBACK
 
-    # 반도체 비중 계산
-    semi_share = round((semi_exp_cur / total_exp_cur) * 100, 1) if (semi_exp_cur and total_exp_cur) else None
+    # 전체 수출 총액 조회 (반도체 비중의 정확한 분모)
+    grand_total = _fetch_grand_total(CUSTOMS_API_KEY, cur_ym)
+    if grand_total and semi_exp_cur:
+        semi_share = round((semi_exp_cur / grand_total) * 100, 1)
+        print(f"    ℹ 전체 수출 ${grand_total/1e8:.1f}억 기준 반도체 비중 {semi_share}%")
+    else:
+        semi_share = None
 
-    result = dict(TRADE_FALLBACK)  # 차트/국가 데이터는 유지
+    # 국가별 수출 YoY 자동 수집
+    print("  📡 국가별 수출 수집 중...")
+    countries = _collect_countries(CUSTOMS_API_KEY, cur_ym, prev_ym)
+
+    result = dict(TRADE_FALLBACK)  # 차트 데이터는 유지
     result["period"] = cur_ym[:4] + "." + cur_ym[4:] + " (확정치)"
     result["items"] = items
+    if countries:
+        result["countries"] = countries
+    result["export_total_usd_bn"] = round(grand_total / 1e8, 1) if grand_total else None
     result["semiconductor_usd_bn"] = round(semi_exp_cur / 1e8, 1) if semi_exp_cur else None
     result["semiconductor_yoy_pct"] = semi_yoy
     result["semiconductor_share_pct"] = semi_share
@@ -390,4 +478,3 @@ def run():
 
 if __name__ == "__main__":
     run()
-    
