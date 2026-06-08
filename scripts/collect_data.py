@@ -244,7 +244,7 @@ TRADE_FALLBACK = {
         {"name": "중국", "yoy": 96.5, "direction": "up"},
         {"name": "미국", "yoy": 79.3, "direction": "up"},
         {"name": "베트남", "yoy": 70.2, "direction": "up"},
-        {"name": "EU", "yoy": 21.7, "direction": "up"},
+        {"name": "일본", "yoy": 21.7, "direction": "up"},
     ],
     "semiconductor_trend": [
         {"label": "'25 1Q", "pct": 19.5}, {"label": "'25 2Q", "pct": 21.2},
@@ -444,9 +444,59 @@ def collect_trade():
 # 메인 Wrapper — 전체 수집 후 JSON 저장
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+def _update_history(trade, path="data/history.json"):
+    """반도체 비중을 월별 history에 누적. 같은 달은 갱신, 새 달은 추가."""
+    share = trade.get("semiconductor_share_pct")
+    period = trade.get("period", "")  # 예: "2026.04 (확정치)"
+    if share is None or not period:
+        return trade
+
+    # period에서 'YY MM' 라벨 생성 (예: 2026.04 → '26 4월)
+    ym = period.split(" ")[0]  # "2026.04"
+    try:
+        yy = ym.split(".")[0][2:]
+        mm = int(ym.split(".")[1])
+        label = f"'{yy} {mm}월"
+    except Exception:
+        label = ym
+
+    # 기존 history 로드
+    history = []
+    if os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                history = json.load(f)
+        except Exception:
+            history = []
+
+    # 같은 라벨 있으면 갱신, 없으면 추가
+    found = False
+    for h in history:
+        if h["label"] == label:
+            h["pct"] = share
+            found = True
+            break
+    if not found:
+        history.append({"label": label, "pct": share})
+
+    # 최근 12개월만 유지
+    history = history[-12:]
+
+    # 저장
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(history, f, ensure_ascii=False, indent=2)
+    print(f"  📈 비중 history 갱신: {label} = {share}% (총 {len(history)}개월)")
+
+    # trade에 history 합치기 (차트용)
+    trade["semiconductor_history"] = history
+    return trade
+
+
 def _build_payload(nasdaq, kospi, trade):
     """수집된 데이터를 최종 JSON 형태로 조합"""
     kst = timezone(timedelta(hours=9))
+    trade = _update_history(trade)  # 비중 history 누적
     return {
         "updated_at": datetime.now(kst).strftime("%Y-%m-%d %H:%M KST"),
         "nasdaq": nasdaq,
