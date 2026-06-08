@@ -479,8 +479,8 @@ def _update_history(trade, path="data/history.json"):
     if not found:
         history.append({"label": label, "pct": share})
 
-    # 최근 12개월만 유지
-    history = history[-12:]
+    # 과거 분기 데이터 + 최근 월별 데이터 누적 — 최대 24개 유지
+    history = history[-24:]
 
     # 저장
     os.makedirs(os.path.dirname(path), exist_ok=True)
