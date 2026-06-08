@@ -497,12 +497,102 @@ def _build_payload(nasdaq, kospi, trade):
     """수집된 데이터를 최종 JSON 형태로 조합"""
     kst = timezone(timedelta(hours=9))
     trade = _update_history(trade)  # 비중 history 누적
+    now = datetime.now(kst)
     return {
-        "updated_at": datetime.now(kst).strftime("%Y-%m-%d %H:%M KST"),
+        "updated_at": now.strftime("%Y-%m-%d %H:%M KST"),
+        "data_freshness": {
+            "stocks": now.strftime("%Y-%m-%d"),          # 주가: 당일
+            "trade": trade.get("period", "—"),            # 무역: 확정월
+        },
         "nasdaq": nasdaq,
         "kospi": kospi,
         "trade": trade,
     }
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 직전값 유지 — 수집 실패한 종목은 이전 latest.json 값으로 메움
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+def _load_previous(path="data/latest.json"):
+    """이전 latest.json 로드 (없으면 None)"""
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+def _fill_missing(new_list, old_list, key_field, value_fields):
+    """새 데이터의 빈 값(None)을 이전 데이터로 메움"""
+    if not old_list:
+        return new_list
+    old_map = {item[key_field]: item for item in old_list if key_field in item}
+    filled = 0
+    for item in new_list:
+        old = old_map.get(item.get(key_field))
+        if not old:
+            continue
+        for vf in value_fields:
+            if item.get(vf) is None and old.get(vf) is not None:
+                item[vf] = old[vf]
+                filled += 1
+    if filled:
+        print(f"  🔧 직전값으로 {filled}개 빈 항목 보정")
+    return new_list
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 텔레그램 알림
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TG_TOKEN = os.environ.get("TELEGRAM_TOKEN", "")
+TG_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
+
+def _send_telegram(text):
+    """텔레그램 메시지 전송"""
+    if not TG_TOKEN or not TG_CHAT_ID:
+        print("  ℹ 텔레그램 미설정 → 알림 건너뜀")
+        return
+    url = f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage"
+    try:
+        resp = requests.post(url, json={
+            "chat_id": TG_CHAT_ID, "text": text,
+            "parse_mode": "HTML", "disable_web_page_preview": True,
+        }, timeout=10)
+        resp.raise_for_status()
+        print("  📲 텔레그램 알림 발송 완료")
+    except Exception as e:
+        print(f"  ⚠ 텔레그램 발송 오류: {e}")
+
+def _build_alert(payload):
+    """알림 메시지 생성 — 핵심 시그널 요약"""
+    lines = ["<b>📊 글투 일일 업데이트</b>", payload["updated_at"], ""]
+
+    # 무역: 반도체 비중 + 최대 증가 품목
+    t = payload["trade"]
+    if t.get("semiconductor_share_pct") is not None:
+        lines.append(f"🔹 반도체 수출 비중: <b>{t['semiconductor_share_pct']}%</b>")
+    items = t.get("items", [])
+    if items:
+        top = max(items, key=lambda x: x.get("yoy", 0))
+        lines.append(f"🔹 수출 최대 증가: {top['name']} <b>+{top['yoy']}%</b>")
+
+    # KOSPI: 역프(저평가) TOP3
+    kospi = payload.get("kospi", [])
+    yk = [s for s in kospi if s.get("fwd_judge") == "역프" and s.get("fwd_kimpo") is not None]
+    yk.sort(key=lambda x: x["fwd_kimpo"])  # 가장 낮은(저평가) 순
+    if yk:
+        lines.append("")
+        lines.append("<b>🇰🇷 저평가 TOP3 (Fwd 역프)</b>")
+        for s in yk[:3]:
+            lines.append(f"  • {s['name']}: {s['fwd_kimpo']}%")
+
+    lines.append("")
+    lines.append("🔗 https://august-kim.github.io/-/")
+    return "\n".join(lines)
+
 
 def _save_json(payload, path="data/latest.json"):
     """JSON 파일 저장"""
@@ -516,11 +606,26 @@ def run():
     print("=" * 50)
     print("  글투 데이터 수집 시작")
     print("=" * 50)
+
+    prev = _load_previous()  # 이전 데이터 (직전값 유지용)
+
     nasdaq = collect_nasdaq()
     kospi  = collect_kospi()
     trade  = collect_trade()
+
+    # 직전값 유지 — 빈 값 보정
+    if prev:
+        nasdaq = _fill_missing(nasdaq, prev.get("nasdaq"), "ticker",
+                               ["per", "fwd_per", "premium", "fwd_premium"])
+        kospi  = _fill_missing(kospi, prev.get("kospi"), "code",
+                               ["kr_per", "kr_fwd", "kimpo", "fwd_kimpo"])
+
     payload = _build_payload(nasdaq, kospi, trade)
     _save_json(payload)
+
+    # 텔레그램 알림
+    _send_telegram(_build_alert(payload))
+
     print("=" * 50)
     print(f"  ✅ 완료: {payload['updated_at']}")
     print("=" * 50)
