@@ -27,7 +27,7 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 13px; }
-
+ 
 /* ── 레이아웃 ── */
 .container { max-width: 1100px; margin: 0 auto; padding: 20px 16px 40px; }
 header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 8px; }
@@ -36,14 +36,14 @@ header h1 span { font-size: 12px; font-weight: 400; color: var(--text2); margin-
 .updated { font-size: 11px; color: var(--text3); }
 .live-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--up); margin-right: 4px; animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-
+ 
 /* ── 탭 ── */
 .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin-bottom: 16px; overflow-x: auto; }
 .tab { padding: 9px 16px; font-size: 12px; font-weight: 500; border: none; background: none; cursor: pointer; color: var(--text2); border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; font-family: var(--font); transition: color .15s; }
 .tab:hover { color: var(--text); }
 .tab.active { color: var(--text); border-bottom-color: var(--up); }
 .panel { display: none; } .panel.active { display: block; }
-
+ 
 /* ── 카드·메트릭 ── */
 .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 9px; margin-bottom: 14px; }
 .metric { background: var(--bg2); border-radius: var(--radius); padding: 12px 14px; }
@@ -53,7 +53,7 @@ header h1 span { font-size: 12px; font-weight: 400; color: var(--text2); margin-
 .up { color: var(--up); } .down { color: var(--down); } .neu { color: var(--text3); }
 .card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 12px; }
 .slbl { font-size: 10px; font-weight: 600; color: var(--text3); letter-spacing: .07em; text-transform: uppercase; margin-bottom: 10px; }
-
+ 
 /* ── 테이블 ── */
 .tbl-wrap { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; min-width: 720px; }
@@ -62,7 +62,7 @@ th.tl { text-align: left; }
 td { padding: 6px 8px; border-bottom: 1px solid var(--border); font-size: 11px; text-align: center; white-space: nowrap; }
 td.tl { text-align: left; }
 tr:hover td { background: var(--bg2); }
-
+ 
 /* ── 배지 ── */
 .bdg { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
 .bdg-red  { background: #FCEBEB; color: #791F1F; }
@@ -73,7 +73,7 @@ tr:hover td { background: var(--bg2); }
 .bdg-drk  { background: #D3D1C7; color: #2C2C2A; }
 .bdg-kim  { background: #E1F5EE; color: #0F6E56; }
 .bdg-ykp  { background: #FAECE7; color: #993C1D; }
-
+ 
 /* ── 필터 ── */
 .frow { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 11px; align-items: center; }
 .frow select, .frow input { height: 30px; font-size: 11px; padding: 0 9px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-family: var(--font); }
@@ -81,7 +81,7 @@ tr:hover td { background: var(--bg2); }
 .fbtn { font-size: 11px; padding: 3px 10px; border: 1px solid var(--border); border-radius: 20px; background: transparent; cursor: pointer; color: var(--text2); font-family: var(--font); }
 .fbtn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
 .cnt-lbl { font-size: 11px; color: var(--text3); margin-left: auto; }
-
+ 
 /* ── 통합분석 ── */
 .insight { background: var(--bg2); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 12px; font-size: 12px; line-height: 2; color: var(--text2); }
 .insight strong { color: var(--text); }
@@ -90,16 +90,16 @@ tr:hover td { background: var(--bg2); }
 .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
 .stat-row:last-child { border-bottom: none; }
 .chart-wrap { position: relative; width: 100%; height: 200px; }
-
+ 
 /* ── 로딩 ── */
 #loading { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 280px; gap: 12px; color: var(--text2); }
 .spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--up); border-radius: 50%; animation: spin .7s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-
+ 
 /* ── 범례 ── */
 .legend { display: flex; gap: 8px; flex-wrap: wrap; padding: 8px 0 0; font-size: 10px; color: var(--text2); }
 .legend span { display: flex; align-items: center; gap: 3px; }
-
+ 
 /* ── 오류 ── */
 .error-box { background: #FCEBEB; border: 1px solid #F09595; border-radius: var(--radius); padding: 14px 16px; color: #791F1F; font-size: 12px; margin: 20px 0; }
 </style>
@@ -110,7 +110,7 @@ tr:hover td { background: var(--bg2); }
     <h1>글투 <span>글로벌 투자 통합 대시보드 · NASDAQ 100 · KOSPI 500 · 무역통계</span></h1>
     <span class="updated" id="updatedAt"><span class="live-dot"></span>데이터 로딩 중...</span>
   </header>
-
+ 
   <div id="loading"><div class="spinner"></div><span>최신 데이터 불러오는 중...</span></div>
   <div id="app" style="display:none">
     <div class="tabs">
@@ -119,7 +119,7 @@ tr:hover td { background: var(--bg2); }
       <button class="tab" onclick="sw('ksp')">🇰🇷 KOSPI 500</button>
       <button class="tab" onclick="sw('combo')">🔗 통합분석</button>
     </div>
-
+ 
     <!-- ── 무역통계 ── -->
     <div id="p-trade" class="panel active">
       <div class="metrics" id="tradeMetrics"></div>
@@ -133,7 +133,7 @@ tr:hover td { background: var(--bg2); }
       </div>
       <div id="tradeInsight" class="insight"></div>
     </div>
-
+ 
     <!-- ── NASDAQ 100 ── -->
     <div id="p-ndx" class="panel">
       <div class="metrics" id="ndxMetrics"></div>
@@ -167,7 +167,7 @@ tr:hover td { background: var(--bg2); }
         <span><span class="bdg bdg-tel">역프</span>-50% 초과 할인</span>
       </div>
     </div>
-
+ 
     <!-- ── KOSPI 500 ── -->
     <div id="p-ksp" class="panel">
       <div class="metrics" id="kspMetrics"></div>
@@ -175,8 +175,8 @@ tr:hover td { background: var(--bg2); }
         <input type="text" id="kspSearch" placeholder="종목명·코드..." oninput="renderKsp()">
         <select id="kspSector" onchange="renderKsp()"><option value="">전체 섹터</option></select>
         <select id="kspSort" onchange="renderKsp()">
-          <option value="kimpo">김포율순</option>
-          <option value="fkimpo">Fwd 김포율순</option>
+          <option value="kimpo">김프율순</option>
+          <option value="fkimpo">Fwd 김프율순</option>
           <option value="kr_per">한국PER순</option>
         </select>
         <span class="cnt-lbl" id="kspCnt"></span>
@@ -185,8 +185,8 @@ tr:hover td { background: var(--bg2); }
         <table>
           <thead><tr>
             <th>코드</th><th class="tl">종목명</th><th class="tl">섹터</th><th>US기준</th>
-            <th>한국PER</th><th>미국PER</th><th>김포율</th>
-            <th>Fwd한국PER</th><th>Fwd미국PER</th><th>Fwd김포율</th>
+            <th>한국PER</th><th>미국PER</th><th>김프율</th>
+            <th>Fwd한국PER</th><th>Fwd미국PER</th><th>Fwd김프율</th>
             <th>현재판정</th><th>Fwd판정</th>
           </tr></thead>
           <tbody id="kspBody"></tbody>
@@ -199,7 +199,7 @@ tr:hover td { background: var(--bg2); }
         <span><span class="bdg bdg-drk">적자/무의미</span></span>
       </div>
     </div>
-
+ 
     <!-- ── 통합분석 ── -->
     <div id="p-combo" class="panel">
       <div class="slbl" style="margin-bottom:10px">섹터별 무역동향 × NASDAQ × KOSPI 3중 매핑</div>
@@ -223,7 +223,7 @@ tr:hover td { background: var(--bg2); }
     </div>
   </div>
 </div>
-
+ 
 <script>
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 유틸
@@ -256,7 +256,7 @@ function tradeBdg(dir, label) {
     ? `<span class="bdg bdg-kim">${label}</span>`
     : `<span class="bdg bdg-ykp">${label}</span>`;
 }
-
+ 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 무역통계 렌더
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -295,7 +295,7 @@ function renderTrade(t) {
                 x: { ticks: { font: { size: 10 } }, grid: { display: false } } } }
   });
 }
-
+ 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // NASDAQ 렌더
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -331,7 +331,7 @@ function renderNdx() {
       <td>${ndxBdg(d.judge)}</td>
       <td>${ndxBdg(d.fwd_judge)}</td>
     </tr>`).join("");
-
+ 
   const hi = _ndxData.filter(d => d.judge === "고평가").length;
   const lo = _ndxData.filter(d => d.judge === "저평가" || d.judge === "역프").length;
   $("ndxMetrics").innerHTML = `
@@ -341,7 +341,7 @@ function renderNdx() {
     <div class="metric"><div class="m-lbl">저평가·역프</div><div class="m-val up">${lo}개</div><div class="m-sub up">섹터대비 -20% 이상 할인</div></div>
   `;
 }
-
+ 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // KOSPI 렌더
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -371,7 +371,7 @@ function renderKsp() {
       <td>${kspBdg(d.judge)}</td>
       <td>${kspBdg(d.fwd_judge)}</td>
     </tr>`).join("");
-
+ 
   const yk = _kspData.filter(d => d.judge === "역프").length;
   const km = _kspData.filter(d => d.judge === "김프").length;
   $("kspMetrics").innerHTML = `
@@ -381,7 +381,7 @@ function renderKsp() {
     <div class="metric"><div class="m-lbl">데이터 소스</div><div class="m-val" style="font-size:13px">🟢 실시간</div><div class="m-sub neu">yfinance 자동 수집</div></div>
   `;
 }
-
+ 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 통합분석 렌더
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -404,17 +404,17 @@ function renderCombo(t) {
       <td>${r.kspJ !== "—" ? kspBdg(r.kspJ) : "—"}</td>
       <td><span class="bdg ${r.overall}">${r.oLabel}</span></td>
     </tr>`).join("");
-
+ 
   $("comboInsight").innerHTML = `
     🥇 <strong>SK하이닉스 (000660)</strong> — 반도체 수출 +${t.semiconductor_yoy_pct}% 직접 수혜 / Fwd 역프 / HBM3E 독점 공급<br>
     🥇 <strong>삼성전자 (005930)</strong> — 반도체 수출 최대 수혜 / Fwd 역프 / HBM4 전환 모멘텀<br>
     🥈 <strong>마이크론 NASDAQ (MU)</strong> — Fwd PER 12x · 섹터 대비 저평가 / HBM 공급망 직접 편입<br>
     🥈 <strong>AMAT · LRCX</strong> — 한국 반도체장비 수입 +129.7% 수혜 / 중립 구간<br>
-    ⚠️ <strong>LS ELECTRIC · 두산에너빌리티</strong> — 전력망 수혜 확실하나 Fwd 김포율 +150% 이상 과열<br>
+    ⚠️ <strong>LS ELECTRIC · 두산에너빌리티</strong> — 전력망 수혜 확실하나 Fwd 김프율 +150% 이상 과열<br>
     ⚠️ <strong>TSLA · 현대차·기아</strong> — 미국 관세 직격 + TSLA PER 과열. 관망 유지<br>
     ❌ <strong>팔란티어 (PLTR)</strong> — AI 테마 수혜 기대에도 PER 250x. 리스크 극단적
   `;
-
+ 
   // 이중 축 차트
   if (window._comboChart) window._comboChart.destroy();
   window._comboChart = new Chart($("comboChart"), {
@@ -437,7 +437,7 @@ function renderCombo(t) {
       } }
   });
 }
-
+ 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 탭 전환
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -447,7 +447,7 @@ function sw(id) {
   document.querySelectorAll(".tab").forEach((t, i) => t.classList.toggle("active", tabIds[i] === id));
   $("p-" + id).classList.add("active");
 }
-
+ 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 드롭다운 채우기
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -459,7 +459,7 @@ function _populateSelect(elId, items) {
     el.appendChild(o);
   });
 }
-
+ 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 메인 — latest.json 로드 후 전체 렌더
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -469,31 +469,31 @@ async function init() {
     const res = await fetch("./data/latest.json?t=" + Date.now());
     if (!res.ok) throw new Error("데이터 파일을 찾을 수 없습니다.");
     const data = await res.json();
-
+ 
     _ndxData = data.nasdaq || [];
     _kspData = data.kospi  || [];
     const trade = data.trade || {};
-
+ 
     // 드롭다운 채우기
     _populateSelect("ndxSector", _ndxData.map(d => d.sector));
     _populateSelect("kspSector", _kspData.map(d => d.sector));
-
+ 
     // 렌더
     renderTrade(trade);
     renderNdx();
     renderKsp();
     renderCombo(trade);
-
+ 
     // 타임스탬프
     $("updatedAt").innerHTML = `<span class="live-dot"></span>최종 업데이트: ${data.updated_at || "—"}`;
     $("loading").style.display = "none";
     $("app").style.display = "block";
-
+ 
   } catch (err) {
     $("loading").innerHTML = `<div class="error-box">⚠️ 데이터 로딩 실패: ${err.message}<br><small>GitHub Actions가 아직 실행 전이거나 data/latest.json이 없을 수 있습니다.<br>scripts/collect_data.py를 먼저 실행해주세요.</small></div>`;
   }
 }
-
+ 
 init();
 </script>
 </body>
