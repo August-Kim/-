@@ -8,6 +8,7 @@ collect_data.py
 import json
 import os
 import time
+import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 import yfinance as yf
 import requests
@@ -210,81 +211,145 @@ def collect_kospi():
     return stocks
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 내부 함수 — 관세청 무역통계 (UNI-PASS API)
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CUSTOMS_API_KEY = os.environ.get("CUSTOMS_API_KEY", "")
+CUSTOMS_URL = "https://apis.data.go.kr/1220000/Itemtrade/getItemtradeList"
 
-CUSTOMS_API_KEY = os.environ.get("CUSTOMS_API_KEY", "")  # GitHub Secret에서 주입
+# 글투 품목 → HS코드(2~4단위 대표코드) 매핑
+ITEM_HS_MAP = [
+    ("반도체",         "8542"),
+    ("컴퓨터주변기기", "8471"),
+    ("석유제품",       "2710"),
+    ("가전제품",       "8418"),
+    ("승용차",         "8703"),
+]
 
-# 관세청 API가 없을 때 사용하는 최근 공개 수치 (매월 수동 업데이트 가능)
+# 주요 수출 상대국 → 관세청 국가코드
+# (국가별 수출입실적 API는 별도 — 여기선 품목 중심이라 국가 데이터는 fallback 유지)
+
+# API 실패 시 사용할 기존 수치 (안전망)
 TRADE_FALLBACK = {
     "period": "2026.05.1~20",
-    "export_total_usd_bn": 52.6,
-    "export_yoy_pct": 64.8,
-    "semiconductor_usd_bn": 21.9,
-    "semiconductor_yoy_pct": 202.1,
-    "semiconductor_share_pct": 41.7,
-    "trade_balance_usd_bn": 1.7,
+    "export_total_usd_bn": 52.6, "export_yoy_pct": 64.8,
+    "semiconductor_usd_bn": 21.9, "semiconductor_yoy_pct": 202.1,
+    "semiconductor_share_pct": 41.7, "trade_balance_usd_bn": 1.7,
     "items": [
-        {"name": "반도체",        "yoy": 202.1,  "direction": "up"},
-        {"name": "컴퓨터주변기기", "yoy": 305.5,  "direction": "up"},
-        {"name": "석유제품",      "yoy": 46.3,   "direction": "up"},
-        {"name": "가전제품",      "yoy": -6.3,   "direction": "down"},
-        {"name": "승용차",        "yoy": -10.1,  "direction": "down"},
+        {"name": "반도체", "yoy": 202.1, "direction": "up"},
+        {"name": "컴퓨터주변기기", "yoy": 305.5, "direction": "up"},
+        {"name": "석유제품", "yoy": 46.3, "direction": "up"},
+        {"name": "가전제품", "yoy": -6.3, "direction": "down"},
+        {"name": "승용차", "yoy": -10.1, "direction": "down"},
     ],
     "countries": [
-        {"name": "대만",  "yoy": 110.4, "direction": "up"},
-        {"name": "중국",  "yoy": 96.5,  "direction": "up"},
-        {"name": "미국",  "yoy": 79.3,  "direction": "up"},
-        {"name": "베트남","yoy": 70.2,  "direction": "up"},
-        {"name": "EU",    "yoy": 21.7,  "direction": "up"},
+        {"name": "대만", "yoy": 110.4, "direction": "up"},
+        {"name": "중국", "yoy": 96.5, "direction": "up"},
+        {"name": "미국", "yoy": 79.3, "direction": "up"},
+        {"name": "베트남", "yoy": 70.2, "direction": "up"},
+        {"name": "EU", "yoy": 21.7, "direction": "up"},
     ],
     "semiconductor_trend": [
-        {"label": "'25 1Q", "pct": 19.5},
-        {"label": "'25 2Q", "pct": 21.2},
-        {"label": "'25 3Q", "pct": 22.8},
-        {"label": "'25 4Q", "pct": 24.0},
-        {"label": "'26 1Q", "pct": 32.0},
-        {"label": "'26 3월","pct": 35.0},
-        {"label": "'26 5월","pct": 41.7},
+        {"label": "'25 1Q", "pct": 19.5}, {"label": "'25 2Q", "pct": 21.2},
+        {"label": "'25 3Q", "pct": 22.8}, {"label": "'25 4Q", "pct": 24.0},
+        {"label": "'26 1Q", "pct": 32.0}, {"label": "'26 3월", "pct": 35.0},
+        {"label": "'26 5월", "pct": 41.7},
     ],
-    "source": "fallback"
+    "source": "fallback",
 }
 
-def _fetch_customs_api(api_key, ym):
-    """관세청 UNI-PASS API 호출 (API 키 보유 시)"""
-    base = "https://unipass.customs.go.kr:38010/ext/rest/trtImpExpStas/retrieveTrtImpExpStas"
-    params = {
-        "crkyCn": api_key,
-        "strtYymm": ym, "endYymm": ym,
-        "hsSgn": "0", "imexTp": "1",  # 1=수출
-    }
-    resp = requests.get(base, params=params, timeout=10)
-    resp.raise_for_status()
-    return resp.json()
 
-def _parse_customs_response(raw):
-    """관세청 API 응답 파싱 → 표준 형식 변환"""
-    # 실제 응답 구조에 맞게 파싱
-    items = raw.get("trtImpExpStas", {}).get("item", [])
-    return {"period": "API", "items": items, "source": "customs_api"}
+def _fetch_item_total(api_key, hs_sgn, yymm):
+    """특정 품목·특정월 수출입 총액 조회 → (수출$, 수입$, 무역수지$) 또는 None"""
+    params = {
+        "serviceKey": api_key,
+        "strtYymm": yymm, "endYymm": yymm,
+        "hsSgn": hs_sgn,
+    }
+    try:
+        resp = requests.get(CUSTOMS_URL, params=params, timeout=15)
+        resp.raise_for_status()
+        root = ET.fromstring(resp.content)
+        if root.findtext(".//resultCode") not in ("00", None):
+            return None
+        for item in root.findall(".//item"):
+            if item.findtext("year") == "총계":
+                exp = int(item.findtext("expDlr") or 0)
+                imp = int(item.findtext("impDlr") or 0)
+                bal = int(item.findtext("balPayments") or 0)
+                return (exp, imp, bal)
+    except Exception as e:
+        print(f"    ⚠ {hs_sgn} {yymm} 조회 오류: {e}")
+    return None
+
+
+def _yoy(cur, prev):
+    """전년동월 대비 증감률(%)"""
+    if not prev or prev == 0:
+        return None
+    return round(((cur / prev) - 1) * 100, 1)
+
+
+def _latest_available_month():
+    """관세청 확정치 약 20일 지연 → 2개월 전을 기준월로. (당월YYYYMM, 전년동월YYYYMM)"""
+    now = datetime.now()
+    month, year = now.month - 2, now.year
+    if month <= 0:
+        month += 12
+        year -= 1
+    return f"{year}{month:02d}", f"{year-1}{month:02d}"
+
 
 def collect_trade():
-    """무역통계 수집 — wrapper (API 키 있으면 실시간, 없으면 fallback)"""
-    print("📡 무역통계 수집 중...")
-    if CUSTOMS_API_KEY:
-        try:
-            ym = datetime.now().strftime("%Y%m")
-            raw = _fetch_customs_api(CUSTOMS_API_KEY, ym)
-            data = _parse_customs_response(raw)
-            data["source"] = "customs_api"
-            print("  ✅ 관세청 API 실시간 데이터 수집 완료")
-            return data
-        except Exception as e:
-            print(f"  ⚠ 관세청 API 오류 ({e}), fallback 사용")
-    else:
-        print("  ℹ CUSTOMS_API_KEY 없음 → fallback 데이터 사용")
-    return TRADE_FALLBACK
+    """무역통계 수집 — wrapper. API 성공 시 실시간, 실패 시 fallback"""
+    print("📡 무역통계 수집 중 (관세청 품목별 API)...")
+    if not CUSTOMS_API_KEY:
+        print("  ℹ CUSTOMS_API_KEY 없음 → fallback 사용")
+        return TRADE_FALLBACK
+
+    cur_ym, prev_ym = _latest_available_month()
+    print(f"  기준월: {cur_ym} (전년동월 {prev_ym} 대비)")
+
+    items = []
+    semi_exp_cur = None
+    total_exp_cur = 0
+    total_bal_cur = 0
+
+    for name, hs in ITEM_HS_MAP:
+        cur = _fetch_item_total(CUSTOMS_API_KEY, hs, cur_ym)
+        prev = _fetch_item_total(CUSTOMS_API_KEY, hs, prev_ym)
+        if cur is None:
+            print(f"    ⚠ {name} 데이터 없음, 건너뜀")
+            continue
+        exp_cur, imp_cur, bal_cur = cur
+        exp_prev = prev[0] if prev else None
+        yoy = _yoy(exp_cur, exp_prev)
+        items.append({
+            "name": name,
+            "yoy": yoy if yoy is not None else 0,
+            "direction": "up" if (yoy or 0) >= 0 else "down",
+        })
+        total_exp_cur += exp_cur
+        total_bal_cur += bal_cur
+        if name == "반도체":
+            semi_exp_cur = exp_cur
+            semi_yoy = yoy
+        print(f"    ✅ {name}: 수출 ${exp_cur/1e8:.1f}억 (YoY {yoy}%)")
+
+    if not items:
+        print("  ⚠ 전 품목 실패 → fallback 사용")
+        return TRADE_FALLBACK
+
+    # 반도체 비중 계산
+    semi_share = round((semi_exp_cur / total_exp_cur) * 100, 1) if (semi_exp_cur and total_exp_cur) else None
+
+    result = dict(TRADE_FALLBACK)  # 차트/국가 데이터는 유지
+    result["period"] = cur_ym[:4] + "." + cur_ym[4:] + " (확정치)"
+    result["items"] = items
+    result["semiconductor_usd_bn"] = round(semi_exp_cur / 1e8, 1) if semi_exp_cur else None
+    result["semiconductor_yoy_pct"] = semi_yoy
+    result["semiconductor_share_pct"] = semi_share
+    result["trade_balance_usd_bn"] = round(total_bal_cur / 1e8, 1)
+    result["source"] = "customs_api"
+    print(f"  ✅ 관세청 실시간 수집 완료 (반도체 비중 {semi_share}%)")
+    return result
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -325,5 +390,4 @@ def run():
 
 if __name__ == "__main__":
     run()
-
-
+    
