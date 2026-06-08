@@ -171,6 +171,10 @@ tr:hover td { background: var(--bg2); }
     <!-- ── KOSPI 500 ── -->
     <div id="p-ksp" class="panel">
       <div class="metrics" id="kspMetrics"></div>
+      <div class="card" id="kspTop5Card" style="margin-bottom:12px">
+        <div class="slbl">🎯 오늘의 저평가 TOP 5 (Fwd 역프 기준)</div>
+        <div id="kspTop5"></div>
+      </div>
       <div class="frow">
         <input type="text" id="kspSearch" placeholder="종목명·코드..." oninput="renderKsp()">
         <select id="kspSector" onchange="renderKsp()"><option value="">전체 섹터</option></select>
@@ -396,6 +400,26 @@ function renderKsp() {
     <div class="metric"><div class="m-lbl">분석 종목 수</div><div class="m-val">${_kspData.length}</div><div class="m-sub neu">KOSPI 500 상위</div></div>
     <div class="metric"><div class="m-lbl">데이터 소스</div><div class="m-val" style="font-size:13px">🟢 실시간</div><div class="m-sub neu">yfinance 자동 수집</div></div>
   `;
+
+  // 저평가 TOP5 — Fwd 역프 중 김프율 가장 낮은 순
+  const top5 = _kspData
+    .filter(d => d.fwd_judge === "역프" && d.fwd_kimpo != null)
+    .sort((a, b) => a.fwd_kimpo - b.fwd_kimpo)
+    .slice(0, 5);
+  if (top5.length > 0) {
+    const medals = ["🥇", "🥈", "🥉", "4️⃣", "5️⃣"];
+    $("kspTop5").innerHTML = top5.map((d, i) => `
+      <div class="stat-row">
+        <span style="display:flex;align-items:center;gap:8px">
+          <span>${medals[i]}</span>
+          <strong>${d.name}</strong>
+          <span style="font-size:10px;background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1px 5px;color:var(--text2)">${d.sector}</span>
+        </span>
+        <span class="up" style="font-weight:600">${d.fwd_kimpo}%</span>
+      </div>`).join("");
+  } else {
+    $("kspTop5").innerHTML = `<div style="font-size:12px;color:var(--text3);padding:6px 0">현재 Fwd 역프 종목이 없습니다.</div>`;
+  }
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -500,8 +524,12 @@ async function init() {
     renderKsp();
     renderCombo(trade);
 
-    // 타임스탬프
-    $("updatedAt").innerHTML = `<span class="live-dot"></span>최종 업데이트: ${data.updated_at || "—"}`;
+    // 타임스탬프 + 데이터 신선도
+    const fresh = data.data_freshness || {};
+    const freshLine = (fresh.stocks || fresh.trade)
+      ? `<br><span style="font-size:10px;color:var(--text3)">주가 ${fresh.stocks || "—"} · 무역 ${fresh.trade || "—"}</span>`
+      : "";
+    $("updatedAt").innerHTML = `<span class="live-dot"></span>최종 업데이트: ${data.updated_at || "—"}${freshLine}`;
     $("loading").style.display = "none";
     $("app").style.display = "block";
 
