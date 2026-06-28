@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-06-27 18:17 KST",
+  "updated_at": "2026-06-28 19:10 KST",
   "data_freshness": {
-    "stocks": "2026-06-27",
+    "stocks": "2026-06-28",
     "trade": "2026.04 (확정치)"
   },
   "nasdaq": [
@@ -123,7 +123,7 @@
       "price": 337.39,
       "market_cap_b": 4117.0,
       "week52_high": 408.61,
-      "week52_low": 171.73,
+      "week52_low": 172.77,
       "sector_per": 25.7,
       "sector_fwd_per": 23.2,
       "premium": 0.0,
@@ -334,13 +334,13 @@
       "name": "팔로알토네트웍스",
       "sector": "사이버보안",
       "benchmark": "CIBR",
-      "per": 266.8,
+      "per": 262.2,
       "fwd_per": 73.9,
       "price": 304.2,
       "market_cap_b": 247.9,
       "week52_high": 306.24,
       "week52_low": 139.57,
-      "sector_per": 266.8,
+      "sector_per": 262.2,
       "sector_fwd_per": 73.9,
       "premium": 0.0,
       "fwd_premium": 0.0,
@@ -467,7 +467,7 @@
       "kimpo": null,
       "kr_fwd": 5.5,
       "us_fwd": 9.6,
-      "fwd_kimpo": -42.7,
+      "fwd_kimpo": -43.2,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 339500.0
@@ -525,9 +525,9 @@
       "kr_per": null,
       "us_per": 39.4,
       "kimpo": null,
-      "kr_fwd": 58.9,
+      "kr_fwd": 57.5,
       "us_fwd": 28.6,
-      "fwd_kimpo": 105.9,
+      "fwd_kimpo": 101.1,
       "judge": "적자/무의미",
       "fwd_judge": "김프",
       "price": 1993000.0
@@ -615,9 +615,9 @@
       "kr_per": null,
       "us_per": 45.2,
       "kimpo": null,
-      "kr_fwd": 27.2,
+      "kr_fwd": 28.2,
       "us_fwd": 36.0,
-      "fwd_kimpo": -24.4,
+      "fwd_kimpo": -21.8,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 494500.0
@@ -767,7 +767,7 @@
       "kimpo": null,
       "kr_fwd": 6.2,
       "us_fwd": 13.9,
-      "fwd_kimpo": -55.1,
+      "fwd_kimpo": -55.4,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 109700.0
