@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-07-04 10:08 KST",
+  "updated_at": "2026-07-05 10:15 KST",
   "data_freshness": {
-    "stocks": "2026-07-04",
+    "stocks": "2026-07-05",
     "trade": "2026.05 (확정치)"
   },
   "nasdaq": [
@@ -467,7 +467,7 @@
       "kimpo": null,
       "kr_fwd": 4.9,
       "us_fwd": 9.6,
-      "fwd_kimpo": -48.5,
+      "fwd_kimpo": -49.2,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 309500.0
@@ -525,9 +525,9 @@
       "kr_per": null,
       "us_per": 39.4,
       "kimpo": null,
-      "kr_fwd": 56.2,
+      "kr_fwd": 54.2,
       "us_fwd": 28.6,
-      "fwd_kimpo": 96.4,
+      "fwd_kimpo": 89.4,
       "judge": "적자/무의미",
       "fwd_judge": "김프",
       "price": 1989000.0
@@ -600,9 +600,9 @@
       "kr_per": null,
       "us_per": 14.7,
       "kimpo": null,
-      "kr_fwd": 8.9,
+      "kr_fwd": 8.8,
       "us_fwd": 13.9,
-      "fwd_kimpo": -36.3,
+      "fwd_kimpo": -36.8,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 170100.0
@@ -647,7 +647,7 @@
       "kimpo": null,
       "kr_fwd": 8.2,
       "us_fwd": 13.9,
-      "fwd_kimpo": -40.7,
+      "fwd_kimpo": -40.9,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 107300.0
@@ -662,7 +662,7 @@
       "kimpo": null,
       "kr_fwd": 25.4,
       "us_fwd": 28.6,
-      "fwd_kimpo": -11.1,
+      "fwd_kimpo": -11.3,
       "judge": "적자/무의미",
       "fwd_judge": "중립",
       "price": 183600.0
@@ -675,9 +675,9 @@
       "kr_per": null,
       "us_per": 33.6,
       "kimpo": null,
-      "kr_fwd": 17.6,
+      "kr_fwd": 17.8,
       "us_fwd": 26.0,
-      "fwd_kimpo": -32.4,
+      "fwd_kimpo": -31.6,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 106900.0
@@ -720,9 +720,9 @@
       "kr_per": null,
       "us_per": 37.4,
       "kimpo": null,
-      "kr_fwd": 12.0,
+      "kr_fwd": 11.8,
       "us_fwd": 33.8,
-      "fwd_kimpo": -64.4,
+      "fwd_kimpo": -65.0,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 191000.0
@@ -752,7 +752,7 @@
       "kimpo": null,
       "kr_fwd": 10.7,
       "us_fwd": 15.6,
-      "fwd_kimpo": -31.7,
+      "fwd_kimpo": -31.2,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 320000.0
@@ -795,9 +795,9 @@
       "kr_per": null,
       "us_per": 29.7,
       "kimpo": null,
-      "kr_fwd": 13.2,
+      "kr_fwd": 13.3,
       "us_fwd": 31.1,
-      "fwd_kimpo": -57.5,
+      "fwd_kimpo": -57.4,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 195800.0
