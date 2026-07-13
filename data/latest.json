@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-13 21:19 KST",
+  "updated_at": "2026-07-13 21:35 KST",
   "data_freshness": {
     "stocks": "2026-07-13",
     "trade": "2026.05 (확정치)"
@@ -16,11 +16,11 @@
       "market_cap_b": 5109.7,
       "week52_high": 236.54,
       "week52_low": 162.02,
-      "sector_per": 94.8,
-      "sector_fwd_per": 26.4,
-      "premium": -65.9,
-      "fwd_premium": -37.5,
-      "judge": "역프",
+      "sector_per": 63.1,
+      "sector_fwd_per": 28.9,
+      "premium": -48.8,
+      "fwd_premium": -42.9,
+      "judge": "저평가",
       "fwd_judge": "저평가"
     },
     {
@@ -34,12 +34,12 @@
       "market_cap_b": 4631.2,
       "week52_high": 317.4,
       "week52_low": 201.5,
-      "sector_per": 38.2,
-      "sector_fwd_per": 32.8,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
-      "judge": "중립",
-      "fwd_judge": "중립"
+      "sector_per": null,
+      "sector_fwd_per": null,
+      "premium": null,
+      "fwd_premium": null,
+      "judge": "비교불가",
+      "fwd_judge": "비교불가"
     },
     {
       "ticker": "MSFT",
@@ -52,12 +52,12 @@
       "market_cap_b": 2860.7,
       "week52_high": 555.45,
       "week52_low": 349.2,
-      "sector_per": 22.9,
-      "sector_fwd_per": 19.9,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
-      "judge": "중립",
-      "fwd_judge": "중립"
+      "sector_per": 56.0,
+      "sector_fwd_per": 28.3,
+      "premium": -59.1,
+      "fwd_premium": -29.7,
+      "judge": "역프",
+      "fwd_judge": "저평가"
     },
     {
       "ticker": "AMZN",
@@ -70,12 +70,12 @@
       "market_cap_b": 2639.1,
       "week52_high": 278.56,
       "week52_low": 196.0,
-      "sector_per": 29.3,
-      "sector_fwd_per": 24.8,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
-      "judge": "중립",
-      "fwd_judge": "중립"
+      "sector_per": null,
+      "sector_fwd_per": null,
+      "premium": null,
+      "fwd_premium": null,
+      "judge": "비교불가",
+      "fwd_judge": "비교불가"
     },
     {
       "ticker": "TSLA",
@@ -88,12 +88,12 @@
       "market_cap_b": 1531.4,
       "week52_high": 498.83,
       "week52_low": 297.82,
-      "sector_per": 370.7,
-      "sector_fwd_per": 158.1,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
-      "judge": "중립",
-      "fwd_judge": "중립"
+      "sector_per": null,
+      "sector_fwd_per": null,
+      "premium": null,
+      "fwd_premium": null,
+      "judge": "비교불가",
+      "fwd_judge": "비교불가"
     },
     {
       "ticker": "META",
@@ -106,10 +106,10 @@
       "market_cap_b": 1698.7,
       "week52_high": 796.25,
       "week52_low": 520.26,
-      "sector_per": 24.3,
-      "sector_fwd_per": 18.4,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
+      "sector_per": 25.1,
+      "sector_fwd_per": 20.7,
+      "premium": -3.2,
+      "fwd_premium": -11.1,
       "judge": "중립",
       "fwd_judge": "중립"
     },
@@ -124,10 +124,10 @@
       "market_cap_b": 4358.5,
       "week52_high": 408.61,
       "week52_low": 179.68,
-      "sector_per": 27.2,
-      "sector_fwd_per": 24.5,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
+      "sector_per": 25.1,
+      "sector_fwd_per": 20.7,
+      "premium": 8.4,
+      "fwd_premium": 18.4,
       "judge": "중립",
       "fwd_judge": "중립"
     },
@@ -142,11 +142,11 @@
       "market_cap_b": 1902.9,
       "week52_high": 495.0,
       "week52_low": 269.58,
-      "sector_per": 94.8,
-      "sector_fwd_per": 26.4,
-      "premium": -29.6,
-      "fwd_premium": -22.0,
-      "judge": "저평가",
+      "sector_per": 63.1,
+      "sector_fwd_per": 28.9,
+      "premium": 5.7,
+      "fwd_premium": -28.7,
+      "judge": "중립",
       "fwd_judge": "저평가"
     },
     {
@@ -160,12 +160,12 @@
       "market_cap_b": 406.3,
       "week52_high": 1096.5,
       "week52_low": 844.06,
-      "sector_per": 46.1,
-      "sector_fwd_per": 40.5,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
-      "judge": "중립",
-      "fwd_judge": "중립"
+      "sector_per": null,
+      "sector_fwd_per": null,
+      "premium": null,
+      "fwd_premium": null,
+      "judge": "비교불가",
+      "fwd_judge": "비교불가"
     },
     {
       "ticker": "NFLX",
@@ -178,10 +178,10 @@
       "market_cap_b": 308.9,
       "week52_high": 127.75,
       "week52_low": 70.86,
-      "sector_per": 23.7,
-      "sector_fwd_per": 19.1,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
+      "sector_per": 25.1,
+      "sector_fwd_per": 20.7,
+      "premium": -5.6,
+      "fwd_premium": -7.7,
       "judge": "중립",
       "fwd_judge": "중립"
     },
@@ -196,12 +196,12 @@
       "market_cap_b": 909.7,
       "week52_high": 584.73,
       "week52_low": 141.9,
-      "sector_per": 94.8,
-      "sector_fwd_per": 26.4,
-      "premium": 95.5,
-      "fwd_premium": 59.1,
+      "sector_per": 63.1,
+      "sector_fwd_per": 28.9,
+      "premium": 193.7,
+      "fwd_premium": 45.3,
       "judge": "고평가",
-      "fwd_judge": "고평가"
+      "fwd_judge": "약고평가"
     },
     {
       "ticker": "ORCL",
@@ -214,12 +214,12 @@
       "market_cap_b": 405.1,
       "week52_high": 345.72,
       "week52_low": 134.57,
-      "sector_per": 24.1,
-      "sector_fwd_per": 12.9,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
-      "judge": "중립",
-      "fwd_judge": "중립"
+      "sector_per": 56.0,
+      "sector_fwd_per": 28.3,
+      "premium": -57.0,
+      "fwd_premium": -54.4,
+      "judge": "역프",
+      "fwd_judge": "역프"
     },
     {
       "ticker": "QCOM",
@@ -232,12 +232,12 @@
       "market_cap_b": 199.4,
       "week52_high": 259.92,
       "week52_low": 121.99,
-      "sector_per": 20.3,
-      "sector_fwd_per": 17.2,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
-      "judge": "중립",
-      "fwd_judge": "중립"
+      "sector_per": 63.1,
+      "sector_fwd_per": 28.9,
+      "premium": -67.8,
+      "fwd_premium": -40.5,
+      "judge": "역프",
+      "fwd_judge": "저평가"
     },
     {
       "ticker": "MU",
@@ -250,12 +250,12 @@
       "market_cap_b": 1106.0,
       "week52_high": 1255.0,
       "week52_low": 103.38,
-      "sector_per": 22.1,
-      "sector_fwd_per": 6.5,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
-      "judge": "중립",
-      "fwd_judge": "중립"
+      "sector_per": 63.1,
+      "sector_fwd_per": 28.9,
+      "premium": -65.0,
+      "fwd_premium": -77.5,
+      "judge": "역프",
+      "fwd_judge": "역프"
     },
     {
       "ticker": "AMAT",
@@ -268,12 +268,12 @@
       "market_cap_b": 478.4,
       "week52_high": 739.67,
       "week52_low": 154.47,
-      "sector_per": 61.5,
-      "sector_fwd_per": 39.8,
-      "premium": -7.6,
-      "fwd_premium": -9.0,
+      "sector_per": 63.1,
+      "sector_fwd_per": 28.9,
+      "premium": -10.0,
+      "fwd_premium": 25.3,
       "judge": "중립",
-      "fwd_judge": "중립"
+      "fwd_judge": "약고평가"
     },
     {
       "ticker": "LRCX",
@@ -286,12 +286,12 @@
       "market_cap_b": 438.1,
       "week52_high": 438.5,
       "week52_low": 90.94,
-      "sector_per": 61.5,
-      "sector_fwd_per": 39.8,
-      "premium": 7.6,
-      "fwd_premium": 8.8,
+      "sector_per": 63.1,
+      "sector_fwd_per": 28.9,
+      "premium": 4.9,
+      "fwd_premium": 49.8,
       "judge": "중립",
-      "fwd_judge": "중립"
+      "fwd_judge": "약고평가"
     },
     {
       "ticker": "KLAC",
@@ -304,12 +304,12 @@
       "market_cap_b": 302.4,
       "week52_high": 307.37,
       "week52_low": 83.224,
-      "sector_per": 65.4,
-      "sector_fwd_per": 45.4,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
+      "sector_per": 63.1,
+      "sector_fwd_per": 28.9,
+      "premium": 3.6,
+      "fwd_premium": 57.1,
       "judge": "중립",
-      "fwd_judge": "중립"
+      "fwd_judge": "고평가"
     },
     {
       "ticker": "PLTR",
@@ -322,12 +322,12 @@
       "market_cap_b": 304.0,
       "week52_high": 207.52,
       "week52_low": 106.37,
-      "sector_per": 142.5,
-      "sector_fwd_per": 60.5,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
-      "judge": "중립",
-      "fwd_judge": "중립"
+      "sector_per": 56.0,
+      "sector_fwd_per": 28.3,
+      "premium": 154.5,
+      "fwd_premium": 113.8,
+      "judge": "고평가",
+      "fwd_judge": "고평가"
     },
     {
       "ticker": "PANW",
@@ -340,12 +340,12 @@
       "market_cap_b": 265.6,
       "week52_high": 368.17,
       "week52_low": 139.57,
-      "sector_per": 285.9,
-      "sector_fwd_per": 79.1,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
-      "judge": "중립",
-      "fwd_judge": "중립"
+      "sector_per": null,
+      "sector_fwd_per": null,
+      "premium": null,
+      "fwd_premium": null,
+      "judge": "비교불가",
+      "fwd_judge": "비교불가"
     },
     {
       "ticker": "INTU",
@@ -358,12 +358,12 @@
       "market_cap_b": 75.2,
       "week52_high": 813.7,
       "week52_low": 252.84,
-      "sector_per": 16.8,
-      "sector_fwd_per": 10.1,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
-      "judge": "중립",
-      "fwd_judge": "중립"
+      "sector_per": 56.0,
+      "sector_fwd_per": 28.3,
+      "premium": -70.0,
+      "fwd_premium": -64.3,
+      "judge": "역프",
+      "fwd_judge": "역프"
     },
     {
       "ticker": "ISRG",
@@ -376,12 +376,12 @@
       "market_cap_b": 144.1,
       "week52_high": 603.88,
       "week52_low": 396.68,
-      "sector_per": 49.5,
-      "sector_fwd_per": 34.5,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
-      "judge": "중립",
-      "fwd_judge": "중립"
+      "sector_per": null,
+      "sector_fwd_per": null,
+      "premium": null,
+      "fwd_premium": null,
+      "judge": "비교불가",
+      "fwd_judge": "비교불가"
     },
     {
       "ticker": "TXN",
@@ -394,10 +394,10 @@
       "market_cap_b": 283.5,
       "week52_high": 334.03,
       "week52_low": 152.73,
-      "sector_per": 53.2,
-      "sector_fwd_per": 32.5,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
+      "sector_per": 63.1,
+      "sector_fwd_per": 28.9,
+      "premium": -15.7,
+      "fwd_premium": 12.5,
       "judge": "중립",
       "fwd_judge": "중립"
     },
@@ -412,11 +412,11 @@
       "market_cap_b": 478.1,
       "week52_high": 130.37,
       "week52_low": 65.75,
-      "sector_per": 40.4,
-      "sector_fwd_per": 25.4,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
-      "judge": "중립",
+      "sector_per": 56.0,
+      "sector_fwd_per": 28.3,
+      "premium": -27.9,
+      "fwd_premium": -10.2,
+      "judge": "저평가",
       "fwd_judge": "중립"
     },
     {
@@ -430,12 +430,12 @@
       "market_cap_b": 196.1,
       "week52_high": 391.29,
       "week52_low": 269.77,
-      "sector_per": 25.3,
-      "sector_fwd_per": 15.5,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
-      "judge": "중립",
-      "fwd_judge": "중립"
+      "sector_per": null,
+      "sector_fwd_per": null,
+      "premium": null,
+      "fwd_premium": null,
+      "judge": "비교불가",
+      "fwd_judge": "비교불가"
     },
     {
       "ticker": "CDNS",
@@ -448,12 +448,12 @@
       "market_cap_b": 106.0,
       "week52_high": 416.69,
       "week52_low": 262.75,
-      "sector_per": 89.3,
-      "sector_fwd_per": 40.9,
-      "premium": 0.0,
-      "fwd_premium": 0.0,
-      "judge": "중립",
-      "fwd_judge": "중립"
+      "sector_per": 56.0,
+      "sector_fwd_per": 28.3,
+      "premium": 59.5,
+      "fwd_premium": 44.5,
+      "judge": "고평가",
+      "fwd_judge": "약고평가"
     }
   ],
   "kospi": [
