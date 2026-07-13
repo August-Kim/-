@@ -421,6 +421,12 @@ def collect_trade():
     else:
         semi_share = None
 
+    # 전년 동월 전체 수출 조회 → 수출 YoY 실시간 계산 (고정값 64.8% 버그 수정)
+    grand_prev = _fetch_grand_total(CUSTOMS_API_KEY, prev_ym)
+    export_yoy = _yoy(grand_total, grand_prev) if grand_total else None
+    if export_yoy is not None:
+        print(f"    ℹ 전체 수출 YoY: {export_yoy}%")
+
     # 국가별 수출 YoY 자동 수집
     print("  📡 국가별 수출 수집 중...")
     countries = _collect_countries(CUSTOMS_API_KEY, cur_ym, prev_ym)
@@ -431,6 +437,7 @@ def collect_trade():
     if countries:
         result["countries"] = countries
     result["export_total_usd_bn"] = round(grand_total / 1e8, 1) if grand_total else None
+    result["export_yoy_pct"] = export_yoy
     result["semiconductor_usd_bn"] = round(semi_exp_cur / 1e8, 1) if semi_exp_cur else None
     result["semiconductor_yoy_pct"] = semi_yoy
     result["semiconductor_share_pct"] = semi_share
