@@ -197,14 +197,41 @@ def _fetch_single_kr_stock(yf_ticker, code, name, sector, us_ref, us_per, us_fwd
             "kr_fwd": None, "us_fwd": us_fwd_per, "fwd_kimpo": None,
             "judge": "N/A", "fwd_judge": "N/A", "price": None,
         }
-
+def _fetch_us_ref_pers(ref_tickers):
+    """미국 참조 종목들의 실시간 PER 조회 → {티커: (per, fwd_per)}"""
+    refs = {}
+    for i, t in enumerate(sorted(ref_tickers), 1):
+        print(f"  [ref {i}/{len(ref_tickers)}] {t}...")
+        try:
+            info = yf.Ticker(t).info
+            per = info.get("trailingPE")
+            fwd = info.get("forwardPE")
+            refs[t] = (
+                round(per, 1) if per else None,
+                round(fwd, 1) if fwd else None,
+            )
+        except Exception as e:
+            print(f"  ⚠ {t} 참조 PER 오류: {e}")
+            refs[t] = (None, None)
+        time.sleep(0.3)
+    return refs
 def collect_kospi():
-    """KOSPI 500 종목 PER·김포율 데이터 수집 — wrapper"""
+    """KOSPI 500 종목 PER·김프율 데이터 수집 — wrapper"""
     print("📡 KOSPI 500 데이터 수집 중...")
+
+    # 미국 참조 종목 PER 실시간 조회 (하드코딩 → 라이브, 실패 시 fallback)
+    ref_tickers = {row[4] for row in KOSPI_TICKERS}
+    print(f"  📡 미국 참조 {len(ref_tickers)}종목 PER 조회 중...")
+    refs = _fetch_us_ref_pers(ref_tickers)
+
     stocks = []
     for i, row in enumerate(KOSPI_TICKERS, 1):
-        print(f"  [{i}/{len(KOSPI_TICKERS)}] {row[2]}...")
-        data = _fetch_single_kr_stock(*row)
+        yf_ticker, code, name, sector, us_ref, fb_per, fb_fwd = row
+        live_per, live_fwd = refs.get(us_ref, (None, None))
+        us_per = live_per if live_per else fb_per   # 라이브 실패 → 표의 기존 값
+        us_fwd = live_fwd if live_fwd else fb_fwd
+        print(f"  [{i}/{len(KOSPI_TICKERS)}] {name}...")
+        data = _fetch_single_kr_stock(yf_ticker, code, name, sector, us_ref, us_per, us_fwd)
         stocks.append(data)
         time.sleep(0.3)
     print(f"  ✅ KOSPI {len(stocks)}개 수집 완료")
