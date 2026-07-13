@@ -71,29 +71,30 @@ def _fetch_single_us_stock(ticker, name, sector, benchmark):
             "week52_high": None, "week52_low": None,
         }
 
-def _calc_sector_avg_per(stocks):
-    """섹터별 평균 PER 계산"""
-    sector_map = {}
+def _calc_benchmark_avg_per(stocks):
+    """벤치마크 ETF 그룹별 평균 PER 계산 (2종목 이상일 때만 유효한 기준으로 인정)"""
+    bm_map = {}
     for s in stocks:
-        sec = s["sector"]
-        if sec not in sector_map:
-            sector_map[sec] = {"pers": [], "fwd_pers": []}
+        bm = s["benchmark"]
+        if bm not in bm_map:
+            bm_map[bm] = {"pers": [], "fwd_pers": []}
         if s["per"]:
-            sector_map[sec]["pers"].append(s["per"])
+            bm_map[bm]["pers"].append(s["per"])
         if s["fwd_per"]:
-            sector_map[sec]["fwd_pers"].append(s["fwd_per"])
+            bm_map[bm]["fwd_pers"].append(s["fwd_per"])
     result = {}
-    for sec, vals in sector_map.items():
-        result[sec] = {
-            "avg_per": round(sum(vals["pers"]) / len(vals["pers"]), 1) if vals["pers"] else None,
-            "avg_fwd_per": round(sum(vals["fwd_pers"]) / len(vals["fwd_pers"]), 1) if vals["fwd_pers"] else None,
+    for bm, vals in bm_map.items():
+        result[bm] = {
+            "avg_per":     round(sum(vals["pers"]) / len(vals["pers"]), 1)         if len(vals["pers"]) >= 2 else None,
+            "avg_fwd_per": round(sum(vals["fwd_pers"]) / len(vals["fwd_pers"]), 1) if len(vals["fwd_pers"]) >= 2 else None,
         }
     return result
 
-def _attach_premium(stocks, sector_avgs):
-    """프리미엄율 계산 및 판정 부여"""
-    def _judge(prem):
-        if prem is None: return "적자"
+def _attach_premium(stocks, bm_avgs):
+    """프리미엄율 계산 및 판정 부여 — 기준: 벤치마크 ETF 그룹 평균"""
+    def _judge(prem, per):
+        if per is None:  return "적자"      # PER 자체가 없음 (적자 기업 등)
+        if prem is None: return "비교불가"  # 동종 그룹 2종목 미만 → 기준 없음
         if prem >= 50:   return "고평가"
         if prem >= 20:   return "약고평가"
         if prem >= -20:  return "중립"
@@ -101,15 +102,15 @@ def _attach_premium(stocks, sector_avgs):
         return "역프"
 
     for s in stocks:
-        avg = sector_avgs.get(s["sector"], {})
+        avg = bm_avgs.get(s["benchmark"], {})
         sp  = avg.get("avg_per")
         sfp = avg.get("avg_fwd_per")
         s["sector_per"]     = sp
         s["sector_fwd_per"] = sfp
         s["premium"]     = round(((s["per"] / sp) - 1) * 100, 1) if s["per"] and sp else None
         s["fwd_premium"] = round(((s["fwd_per"] / sfp) - 1) * 100, 1) if s["fwd_per"] and sfp else None
-        s["judge"]       = _judge(s["premium"])
-        s["fwd_judge"]   = _judge(s["fwd_premium"])
+        s["judge"]       = _judge(s["premium"], s["per"])
+        s["fwd_judge"]   = _judge(s["fwd_premium"], s["fwd_per"])
     return stocks
 
 def collect_nasdaq():
@@ -121,8 +122,8 @@ def collect_nasdaq():
         data = _fetch_single_us_stock(ticker, name, sector, bm)
         stocks.append(data)
         time.sleep(0.3)  # rate limit 방지
-    sector_avgs = _calc_sector_avg_per(stocks)
-    stocks = _attach_premium(stocks, sector_avgs)
+    bm_avgs = _calc_benchmark_avg_per(stocks)
+    stocks = _attach_premium(stocks, bm_avgs)
     print(f"  ✅ NASDAQ {len(stocks)}개 수집 완료")
     return stocks
 
@@ -650,7 +651,7 @@ def run():
     # 직전값 유지 — 빈 값 보정
     if prev:
         nasdaq = _fill_missing(nasdaq, prev.get("nasdaq"), "ticker",
-                               ["per", "fwd_per", "premium", "fwd_premium"])
+                               ["per", "fwd_per"])
         kospi  = _fill_missing(kospi, prev.get("kospi"), "code",
                                ["kr_per", "kr_fwd", "kimpo", "fwd_kimpo"])
 
