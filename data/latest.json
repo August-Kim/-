@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-08-09 08:55 KST",
+  "updated_at": "2026-08-10 08:58 KST",
   "data_freshness": {
-    "stocks": "2026-08-09",
+    "stocks": "2026-08-10",
     "trade": "2026.06 (확정치)"
   },
   "nasdaq": [
@@ -247,7 +247,7 @@
       "per": 19.8,
       "fwd_per": 5.7,
       "price": 877.57,
-      "market_cap_b": 991.1,
+      "market_cap_b": 0.0,
       "week52_high": 1255.0,
       "week52_low": 113.46,
       "sector_per": 52.3,
@@ -427,7 +427,7 @@
       "per": 25.5,
       "fwd_per": 17.0,
       "price": 410.94,
-      "market_cap_b": 221.8,
+      "market_cap_b": 222.3,
       "week52_high": 418.4,
       "week52_low": 269.77,
       "sector_per": null,
@@ -445,7 +445,7 @@
       "per": 67.6,
       "fwd_per": 35.6,
       "price": 339.24,
-      "market_cap_b": 93.6,
+      "market_cap_b": 93.4,
       "week52_high": 416.69,
       "week52_low": 262.75,
       "sector_per": 54.7,
@@ -482,7 +482,7 @@
       "kimpo": null,
       "kr_fwd": 3.1,
       "us_fwd": 5.7,
-      "fwd_kimpo": -45.2,
+      "fwd_kimpo": -45.1,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 1422000.0
@@ -631,8 +631,8 @@
       "us_per": 39.8,
       "kimpo": null,
       "kr_fwd": 31.6,
-      "us_fwd": 25.6,
-      "fwd_kimpo": 23.5,
+      "us_fwd": 25.5,
+      "fwd_kimpo": 24.0,
       "judge": "적자/무의미",
       "fwd_judge": "김프",
       "price": 1556000.0
@@ -661,8 +661,8 @@
       "us_per": 39.8,
       "kimpo": null,
       "kr_fwd": 26.4,
-      "us_fwd": 25.6,
-      "fwd_kimpo": 2.9,
+      "us_fwd": 25.5,
+      "fwd_kimpo": 3.3,
       "judge": "적자/무의미",
       "fwd_judge": "중립",
       "price": 199300.0
@@ -811,8 +811,8 @@
       "us_per": 28.4,
       "kimpo": null,
       "kr_fwd": 74.2,
-      "us_fwd": 39.9,
-      "fwd_kimpo": 85.9,
+      "us_fwd": 39.8,
+      "fwd_kimpo": 86.3,
       "judge": "적자/무의미",
       "fwd_judge": "김프",
       "price": 77100.0
