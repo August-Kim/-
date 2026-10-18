@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-17 10:25 KST",
+  "updated_at": "2026-10-18 10:22 KST",
   "data_freshness": {
-    "stocks": "2026-10-17",
+    "stocks": "2026-10-18",
     "trade": "2026.08 (확정치)"
   },
   "nasdaq": [
@@ -53,9 +53,9 @@
       "week52_high": 553.72,
       "week52_low": 349.2,
       "sector_per": 54.2,
-      "sector_fwd_per": 29.6,
+      "sector_fwd_per": 29.7,
       "premium": -45.6,
-      "fwd_premium": -24.7,
+      "fwd_premium": -24.9,
       "judge": "저평가",
       "fwd_judge": "저평가"
     },
@@ -212,12 +212,12 @@
       "fwd_per": 11.7,
       "price": 128.23,
       "market_cap_b": 388.7,
-      "week52_high": 304.28,
+      "week52_high": 289.24,
       "week52_low": 114.5,
       "sector_per": 54.2,
-      "sector_fwd_per": 29.6,
+      "sector_fwd_per": 29.7,
       "premium": -62.9,
-      "fwd_premium": -60.5,
+      "fwd_premium": -60.6,
       "judge": "역프",
       "fwd_judge": "역프"
     },
@@ -317,15 +317,15 @@
       "sector": "AI분석SW",
       "benchmark": "IGV",
       "per": 160.4,
-      "fwd_per": 79.1,
+      "fwd_per": 79.4,
       "price": 186.03,
       "market_cap_b": 447.0,
       "week52_high": 212.94,
       "week52_low": 106.37,
       "sector_per": 54.2,
-      "sector_fwd_per": 29.6,
+      "sector_fwd_per": 29.7,
       "premium": 195.9,
-      "fwd_premium": 167.2,
+      "fwd_premium": 167.3,
       "judge": "고평가",
       "fwd_judge": "고평가"
     },
@@ -359,9 +359,9 @@
       "week52_high": 689.17,
       "week52_low": 252.84,
       "sector_per": 54.2,
-      "sector_fwd_per": 29.6,
+      "sector_fwd_per": 29.7,
       "premium": -63.5,
-      "fwd_premium": -59.1,
+      "fwd_premium": -59.3,
       "judge": "역프",
       "fwd_judge": "역프"
     },
@@ -411,11 +411,11 @@
       "price": 107.39,
       "market_cap_b": 423.4,
       "week52_high": 130.37,
-      "week52_low": 68.95,
+      "week52_low": 69.85,
       "sector_per": 54.2,
-      "sector_fwd_per": 29.6,
+      "sector_fwd_per": 29.7,
       "premium": -40.6,
-      "fwd_premium": -35.5,
+      "fwd_premium": -35.7,
       "judge": "저평가",
       "fwd_judge": "저평가"
     },
@@ -445,13 +445,13 @@
       "per": 63.5,
       "fwd_per": 33.4,
       "price": 319.51,
-      "market_cap_b": 88.0,
+      "market_cap_b": 88.1,
       "week52_high": 416.69,
       "week52_low": 262.75,
       "sector_per": 54.2,
-      "sector_fwd_per": 29.6,
+      "sector_fwd_per": 29.7,
       "premium": 17.2,
-      "fwd_premium": 12.8,
+      "fwd_premium": 12.5,
       "judge": "중립",
       "fwd_judge": "중립"
     }
@@ -751,8 +751,8 @@
       "us_per": 20.4,
       "kimpo": null,
       "kr_fwd": 9.9,
-      "us_fwd": 12.2,
-      "fwd_kimpo": -18.6,
+      "us_fwd": 12.3,
+      "fwd_kimpo": -19.3,
       "judge": "적자/무의미",
       "fwd_judge": "중립",
       "price": 296500.0
@@ -877,6 +877,11 @@
       {
         "name": "중국",
         "yoy": 119.5,
+        "direction": "up"
+      },
+      {
+        "name": "미국",
+        "yoy": 89.1,
         "direction": "up"
       },
       {
