@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-10-31 11:38 KST",
+  "updated_at": "2026-11-01 11:26 KST",
   "data_freshness": {
-    "stocks": "2026-10-31",
-    "trade": "2026.08 (확정치)"
+    "stocks": "2026-11-01",
+    "trade": "2026.09 (확정치)"
   },
   "nasdaq": [
     {
@@ -53,9 +53,9 @@
       "week52_high": 551.15,
       "week52_low": 349.2,
       "sector_per": 53.9,
-      "sector_fwd_per": 29.4,
+      "sector_fwd_per": 29.5,
       "premium": -49.5,
-      "fwd_premium": -26.5,
+      "fwd_premium": -26.8,
       "judge": "저평가",
       "fwd_judge": "저평가"
     },
@@ -64,10 +64,10 @@
       "name": "아마존",
       "sector": "이커머스/클라우드",
       "benchmark": "WCLD",
-      "per": 19.3,
-      "fwd_per": 22.8,
+      "per": 19.4,
+      "fwd_per": 22.6,
       "price": 240.35,
-      "market_cap_b": 2598.4,
+      "market_cap_b": 2598.9,
       "week52_high": 287.2,
       "week52_low": 196.0,
       "sector_per": null,
@@ -212,12 +212,12 @@
       "fwd_per": 11.8,
       "price": 130.67,
       "market_cap_b": 396.1,
-      "week52_high": 265.81,
+      "week52_high": 265.62,
       "week52_low": 114.5,
       "sector_per": 53.9,
-      "sector_fwd_per": 29.4,
+      "sector_fwd_per": 29.5,
       "premium": -62.0,
-      "fwd_premium": -59.9,
+      "fwd_premium": -60.0,
       "judge": "역프",
       "fwd_judge": "역프"
     },
@@ -301,7 +301,7 @@
       "per": 39.6,
       "fwd_per": 22.5,
       "price": 157.91,
-      "market_cap_b": 206.1,
+      "market_cap_b": 205.8,
       "week52_high": 307.37,
       "week52_low": 107.196,
       "sector_per": 41.7,
@@ -317,15 +317,15 @@
       "sector": "AI분석SW",
       "benchmark": "IGV",
       "per": 158.7,
-      "fwd_per": 78.3,
+      "fwd_per": 78.8,
       "price": 184.11,
       "market_cap_b": 442.4,
       "week52_high": 212.94,
       "week52_low": 106.37,
       "sector_per": 53.9,
-      "sector_fwd_per": 29.4,
+      "sector_fwd_per": 29.5,
       "premium": 194.4,
-      "fwd_premium": 166.3,
+      "fwd_premium": 167.1,
       "judge": "고평가",
       "fwd_judge": "고평가"
     },
@@ -359,9 +359,9 @@
       "week52_high": 682.27,
       "week52_low": 252.84,
       "sector_per": 53.9,
-      "sector_fwd_per": 29.4,
+      "sector_fwd_per": 29.5,
       "premium": -61.6,
-      "fwd_premium": -56.8,
+      "fwd_premium": -56.9,
       "judge": "역프",
       "fwd_judge": "역프"
     },
@@ -413,9 +413,9 @@
       "week52_high": 130.37,
       "week52_low": 70.54,
       "sector_per": 53.9,
-      "sector_fwd_per": 29.4,
+      "sector_fwd_per": 29.5,
       "premium": -41.7,
-      "fwd_premium": -36.7,
+      "fwd_premium": -36.9,
       "judge": "저평가",
       "fwd_judge": "저평가"
     },
@@ -429,7 +429,7 @@
       "price": 466.01,
       "market_cap_b": 251.9,
       "week52_high": 475.65,
-      "week52_low": 288.0,
+      "week52_low": 292.12,
       "sector_per": null,
       "sector_fwd_per": null,
       "premium": null,
@@ -449,9 +449,9 @@
       "week52_high": 416.69,
       "week52_low": 262.75,
       "sector_per": 53.9,
-      "sector_fwd_per": 29.4,
+      "sector_fwd_per": 29.5,
       "premium": 21.0,
-      "fwd_premium": 13.3,
+      "fwd_premium": 12.9,
       "judge": "약고평가",
       "fwd_judge": "중립"
     }
@@ -467,7 +467,7 @@
       "kimpo": null,
       "kr_fwd": 3.0,
       "us_fwd": 4.3,
-      "fwd_kimpo": -29.3,
+      "fwd_kimpo": -30.3,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 225000.0
@@ -510,9 +510,9 @@
       "kr_per": null,
       "us_per": 439.4,
       "kimpo": null,
-      "kr_fwd": 6.4,
+      "kr_fwd": 6.7,
       "us_fwd": 185.5,
-      "fwd_kimpo": -96.6,
+      "fwd_kimpo": -96.4,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 282000.0
@@ -555,9 +555,9 @@
       "kr_per": null,
       "us_per": 32.5,
       "kimpo": null,
-      "kr_fwd": 12.4,
+      "kr_fwd": 12.5,
       "us_fwd": 24.8,
-      "fwd_kimpo": -50.0,
+      "fwd_kimpo": -49.7,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 696000.0
@@ -570,9 +570,9 @@
       "kr_per": null,
       "us_per": 439.4,
       "kimpo": null,
-      "kr_fwd": 4.3,
+      "kr_fwd": 4.5,
       "us_fwd": 185.5,
-      "fwd_kimpo": -97.7,
+      "fwd_kimpo": -97.6,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 95600.0
@@ -585,9 +585,9 @@
       "kr_per": null,
       "us_per": 439.4,
       "kimpo": null,
-      "kr_fwd": 6.5,
+      "kr_fwd": 6.7,
       "us_fwd": 185.5,
-      "fwd_kimpo": -96.5,
+      "fwd_kimpo": -96.4,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 334000.0
@@ -613,11 +613,11 @@
       "sector": "산업재/기계",
       "us_ref": "CAT",
       "kr_per": null,
-      "us_per": 26.8,
+      "us_per": 24.4,
       "kimpo": null,
       "kr_fwd": 13.8,
-      "us_fwd": 19.3,
-      "fwd_kimpo": -28.6,
+      "us_fwd": 19.4,
+      "fwd_kimpo": -28.9,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 312000.0
@@ -628,7 +628,7 @@
       "sector": "바이오/제약",
       "us_ref": "LLY",
       "kr_per": null,
-      "us_per": 47.6,
+      "us_per": 46.0,
       "kimpo": null,
       "kr_fwd": 31.9,
       "us_fwd": 28.7,
@@ -658,7 +658,7 @@
       "sector": "바이오/제약",
       "us_ref": "LLY",
       "kr_per": null,
-      "us_per": 47.6,
+      "us_per": 46.0,
       "kimpo": null,
       "kr_fwd": 24.9,
       "us_fwd": 28.7,
@@ -751,8 +751,8 @@
       "us_per": 17.4,
       "kimpo": null,
       "kr_fwd": 9.2,
-      "us_fwd": 12.7,
-      "fwd_kimpo": -27.9,
+      "us_fwd": 13.0,
+      "fwd_kimpo": -29.5,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 273500.0
@@ -810,9 +810,9 @@
       "kr_per": null,
       "us_per": 22.5,
       "kimpo": null,
-      "kr_fwd": 54.5,
+      "kr_fwd": 57.6,
       "us_fwd": 33.1,
-      "fwd_kimpo": 64.8,
+      "fwd_kimpo": 74.1,
       "judge": "적자/무의미",
       "fwd_judge": "김프",
       "price": 54800.0
@@ -823,10 +823,10 @@
       "sector": "산업재/기계",
       "us_ref": "CAT",
       "kr_per": null,
-      "us_per": 26.8,
+      "us_per": 24.4,
       "kimpo": null,
       "kr_fwd": 3.2,
-      "us_fwd": 19.3,
+      "us_fwd": 19.4,
       "fwd_kimpo": -83.6,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
@@ -834,64 +834,64 @@
     }
   ],
   "trade": {
-    "period": "2026.08 (확정치)",
-    "export_total_usd_bn": 983.5,
-    "export_yoy_pct": 68.9,
-    "semiconductor_usd_bn": 382.4,
-    "semiconductor_yoy_pct": 203.1,
-    "semiconductor_share_pct": 38.9,
-    "trade_balance_usd_bn": 355.5,
+    "period": "2026.09 (확정치)",
+    "export_total_usd_bn": 1210.2,
+    "export_yoy_pct": 83.7,
+    "semiconductor_usd_bn": 431.2,
+    "semiconductor_yoy_pct": 216.5,
+    "semiconductor_share_pct": 35.6,
+    "trade_balance_usd_bn": 407.5,
     "items": [
       {
         "name": "반도체",
-        "yoy": 203.1,
+        "yoy": 216.5,
         "direction": "up"
       },
       {
         "name": "컴퓨터주변기기",
-        "yoy": 88.6,
+        "yoy": 18.0,
         "direction": "up"
       },
       {
         "name": "석유제품",
-        "yoy": 68.8,
+        "yoy": 75.4,
         "direction": "up"
       },
       {
         "name": "가전제품",
-        "yoy": -10.9,
+        "yoy": -25.4,
         "direction": "down"
       },
       {
         "name": "승용차",
-        "yoy": -30.1,
+        "yoy": -5.6,
         "direction": "down"
       }
     ],
     "countries": [
       {
         "name": "대만",
-        "yoy": 48.1,
+        "yoy": 96.6,
         "direction": "up"
       },
       {
         "name": "중국",
-        "yoy": 119.5,
+        "yoy": 123.1,
         "direction": "up"
       },
       {
         "name": "미국",
-        "yoy": 89.1,
+        "yoy": 136.9,
         "direction": "up"
       },
       {
         "name": "베트남",
-        "yoy": 63.4,
+        "yoy": 43.9,
         "direction": "up"
       },
       {
         "name": "일본",
-        "yoy": 13.0,
+        "yoy": 25.2,
         "direction": "up"
       }
     ],
@@ -998,6 +998,10 @@
       {
         "label": "'26 8월",
         "pct": 38.9
+      },
+      {
+        "label": "'26 9월",
+        "pct": 35.6
       }
     ]
   }
