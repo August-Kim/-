@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-11-08 11:39 KST",
+  "updated_at": "2026-11-09 11:53 KST",
   "data_freshness": {
-    "stocks": "2026-11-08",
+    "stocks": "2026-11-09",
     "trade": "2026.09 (확정치)"
   },
   "nasdaq": [
@@ -283,7 +283,7 @@
       "per": 29.9,
       "fwd_per": 16.4,
       "price": 200.44,
-      "market_cap_b": 250.8,
+      "market_cap_b": 250.4,
       "week52_high": 438.5,
       "week52_low": 135.5,
       "sector_per": 34.3,
@@ -373,7 +373,7 @@
       "per": 54.8,
       "fwd_per": 36.3,
       "price": 452.8,
-      "market_cap_b": 160.0,
+      "market_cap_b": 157.0,
       "week52_high": 603.88,
       "week52_low": 328.57,
       "sector_per": null,
@@ -465,12 +465,12 @@
       "kr_per": null,
       "us_per": 9.3,
       "kimpo": null,
-      "kr_fwd": 2.4,
+      "kr_fwd": 2.5,
       "us_fwd": 3.3,
-      "fwd_kimpo": -26.0,
+      "fwd_kimpo": -23.7,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 188700.0
+      "price": 194800.0
     },
     {
       "code": "000660",
@@ -480,12 +480,12 @@
       "kr_per": null,
       "us_per": 9.3,
       "kimpo": null,
-      "kr_fwd": 2.1,
+      "kr_fwd": 2.2,
       "us_fwd": 3.3,
-      "fwd_kimpo": -35.9,
+      "fwd_kimpo": -32.8,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 1132000.0
+      "price": 1186000.0
     },
     {
       "code": "402340",
@@ -497,10 +497,10 @@
       "kimpo": null,
       "kr_fwd": 1.7,
       "us_fwd": 11.7,
-      "fwd_kimpo": -85.6,
+      "fwd_kimpo": -85.1,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 724000.0
+      "price": 746000.0
     },
     {
       "code": "005380",
@@ -515,7 +515,7 @@
       "fwd_kimpo": -96.0,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 279500.0
+      "price": 279000.0
     },
     {
       "code": "009150",
@@ -527,10 +527,10 @@
       "kimpo": null,
       "kr_fwd": 17.6,
       "us_fwd": 20.9,
-      "fwd_kimpo": -15.7,
+      "fwd_kimpo": -15.6,
       "judge": "적자/무의미",
       "fwd_judge": "중립",
-      "price": 870000.0
+      "price": 871000.0
     },
     {
       "code": "329180",
@@ -540,12 +540,12 @@
       "kr_per": null,
       "us_per": 30.8,
       "kimpo": null,
-      "kr_fwd": 7.8,
-      "us_fwd": 23.5,
-      "fwd_kimpo": -66.8,
+      "kr_fwd": 7.7,
+      "us_fwd": 23.4,
+      "fwd_kimpo": -67.2,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 262500.0
+      "price": 258000.0
     },
     {
       "code": "012450",
@@ -555,12 +555,12 @@
       "kr_per": null,
       "us_per": 30.8,
       "kimpo": null,
-      "kr_fwd": 12.3,
-      "us_fwd": 23.5,
-      "fwd_kimpo": -47.8,
+      "kr_fwd": 12.2,
+      "us_fwd": 23.4,
+      "fwd_kimpo": -48.0,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 660000.0
+      "price": 651000.0
     },
     {
       "code": "000270",
@@ -570,12 +570,12 @@
       "kr_per": null,
       "us_per": 393.6,
       "kimpo": null,
-      "kr_fwd": 5.0,
+      "kr_fwd": 4.9,
       "us_fwd": 165.9,
       "fwd_kimpo": -97.0,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 100300.0
+      "price": 98100.0
     },
     {
       "code": "012330",
@@ -585,12 +585,12 @@
       "kr_per": null,
       "us_per": 393.6,
       "kimpo": null,
-      "kr_fwd": 7.1,
+      "kr_fwd": 7.0,
       "us_fwd": 165.9,
-      "fwd_kimpo": -95.7,
+      "fwd_kimpo": -95.8,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 349000.0
+      "price": 340500.0
     },
     {
       "code": "105560",
@@ -600,12 +600,12 @@
       "kr_per": null,
       "us_per": 14.0,
       "kimpo": null,
-      "kr_fwd": 7.5,
+      "kr_fwd": 7.6,
       "us_fwd": 13.1,
-      "fwd_kimpo": -42.5,
+      "fwd_kimpo": -41.9,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 151000.0
+      "price": 152600.0
     },
     {
       "code": "028260",
@@ -617,10 +617,10 @@
       "kimpo": null,
       "kr_fwd": 12.1,
       "us_fwd": 17.3,
-      "fwd_kimpo": -30.1,
+      "fwd_kimpo": -30.0,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 273500.0
+      "price": 274000.0
     },
     {
       "code": "207940",
@@ -630,12 +630,12 @@
       "kr_per": null,
       "us_per": 43.9,
       "kimpo": null,
-      "kr_fwd": 32.7,
+      "kr_fwd": 33.4,
       "us_fwd": 26.9,
-      "fwd_kimpo": 21.4,
+      "fwd_kimpo": 24.1,
       "judge": "적자/무의미",
       "fwd_judge": "김프",
-      "price": 1516000.0
+      "price": 1549000.0
     },
     {
       "code": "055550",
@@ -647,10 +647,10 @@
       "kimpo": null,
       "kr_fwd": 6.5,
       "us_fwd": 13.1,
-      "fwd_kimpo": -50.1,
+      "fwd_kimpo": -50.0,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 86700.0
+      "price": 86800.0
     },
     {
       "code": "068270",
@@ -660,12 +660,12 @@
       "kr_per": null,
       "us_per": 43.9,
       "kimpo": null,
-      "kr_fwd": 27.1,
+      "kr_fwd": 27.2,
       "us_fwd": 26.9,
-      "fwd_kimpo": 0.8,
+      "fwd_kimpo": 1.2,
       "judge": "적자/무의미",
       "fwd_judge": "중립",
-      "price": 211000.0
+      "price": 212500.0
     },
     {
       "code": "042660",
@@ -675,12 +675,12 @@
       "kr_per": null,
       "us_per": 30.8,
       "kimpo": null,
-      "kr_fwd": 8.2,
-      "us_fwd": 23.5,
-      "fwd_kimpo": -65.1,
+      "kr_fwd": 8.1,
+      "us_fwd": 23.4,
+      "fwd_kimpo": -65.5,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 47350.0
+      "price": 46700.0
     },
     {
       "code": "267260",
@@ -692,10 +692,10 @@
       "kimpo": null,
       "kr_fwd": 11.5,
       "us_fwd": 20.9,
-      "fwd_kimpo": -45.2,
+      "fwd_kimpo": -44.8,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 366500.0
+      "price": 369500.0
     },
     {
       "code": "010120",
@@ -705,12 +705,12 @@
       "kr_per": null,
       "us_per": 34.1,
       "kimpo": null,
-      "kr_fwd": 21.7,
+      "kr_fwd": 21.6,
       "us_fwd": 20.9,
-      "fwd_kimpo": 4.0,
+      "fwd_kimpo": 3.2,
       "judge": "적자/무의미",
       "fwd_judge": "중립",
-      "price": 116500.0
+      "price": 115600.0
     },
     {
       "code": "066570",
@@ -722,10 +722,10 @@
       "kimpo": null,
       "kr_fwd": 8.5,
       "us_fwd": 32.4,
-      "fwd_kimpo": -73.8,
+      "fwd_kimpo": -73.6,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 138600.0
+      "price": 139500.0
     },
     {
       "code": "298040",
@@ -735,12 +735,12 @@
       "kr_per": null,
       "us_per": 34.1,
       "kimpo": null,
-      "kr_fwd": 13.2,
+      "kr_fwd": 13.4,
       "us_fwd": 20.9,
-      "fwd_kimpo": -37.0,
+      "fwd_kimpo": -35.7,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 1577000.0
+      "price": 1609000.0
     },
     {
       "code": "005490",
@@ -750,12 +750,12 @@
       "kr_per": null,
       "us_per": 15.6,
       "kimpo": null,
-      "kr_fwd": 9.5,
+      "kr_fwd": 9.6,
       "us_fwd": 11.1,
-      "fwd_kimpo": -14.2,
+      "fwd_kimpo": -13.7,
       "judge": "적자/무의미",
       "fwd_judge": "중립",
-      "price": 265000.0
+      "price": 266500.0
     },
     {
       "code": "086790",
@@ -765,12 +765,12 @@
       "kr_per": null,
       "us_per": 14.0,
       "kimpo": null,
-      "kr_fwd": 6.7,
+      "kr_fwd": 6.6,
       "us_fwd": 13.1,
-      "fwd_kimpo": -49.2,
+      "fwd_kimpo": -49.3,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 118300.0
+      "price": 117900.0
     },
     {
       "code": "009540",
@@ -781,8 +781,8 @@
       "us_per": 30.8,
       "kimpo": null,
       "kr_fwd": 3.9,
-      "us_fwd": 23.5,
-      "fwd_kimpo": -83.4,
+      "us_fwd": 23.4,
+      "fwd_kimpo": -83.3,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 240000.0
@@ -795,12 +795,12 @@
       "kr_per": null,
       "us_per": 14.9,
       "kimpo": null,
-      "kr_fwd": 13.5,
+      "kr_fwd": 13.6,
       "us_fwd": 18.5,
-      "fwd_kimpo": -26.9,
+      "fwd_kimpo": -26.6,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 190200.0
+      "price": 190800.0
     },
     {
       "code": "034020",
@@ -810,12 +810,12 @@
       "kr_per": null,
       "us_per": 20.3,
       "kimpo": null,
-      "kr_fwd": 47.0,
+      "kr_fwd": 47.2,
       "us_fwd": 29.9,
-      "fwd_kimpo": 57.2,
+      "fwd_kimpo": 57.9,
       "judge": "적자/무의미",
       "fwd_judge": "김프",
-      "price": 44700.0
+      "price": 44900.0
     },
     {
       "code": "034730",
@@ -825,12 +825,12 @@
       "kr_per": null,
       "us_per": 21.9,
       "kimpo": null,
-      "kr_fwd": 2.8,
+      "kr_fwd": 2.9,
       "us_fwd": 17.3,
-      "fwd_kimpo": -83.8,
+      "fwd_kimpo": -83.2,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
-      "price": 445000.0
+      "price": 460500.0
     }
   ],
   "trade": {
