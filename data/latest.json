@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-11-21 13:10 KST",
+  "updated_at": "2026-11-22 12:21 KST",
   "data_freshness": {
-    "stocks": "2026-11-21",
+    "stocks": "2026-11-22",
     "trade": "2026.09 (확정치)"
   },
   "nasdaq": [
@@ -10,15 +10,15 @@
       "name": "엔비디아",
       "sector": "AI반도체",
       "benchmark": "SOXX",
-      "per": 15.7,
+      "per": 13.5,
       "fwd_per": 7.6,
       "price": 125.53,
       "market_cap_b": 3031.2,
       "week52_high": 243.37,
       "week52_low": 124.5,
-      "sector_per": 32.2,
+      "sector_per": 31.1,
       "sector_fwd_per": 14.5,
-      "premium": -51.2,
+      "premium": -56.6,
       "fwd_premium": -47.6,
       "judge": "역프",
       "fwd_judge": "저평가"
@@ -52,9 +52,9 @@
       "market_cap_b": 3598.1,
       "week52_high": 559.15,
       "week52_low": 349.2,
-      "sector_per": 40.0,
+      "sector_per": 39.8,
       "sector_fwd_per": 23.2,
-      "premium": -36.7,
+      "premium": -36.4,
       "fwd_premium": -13.8,
       "judge": "저평가",
       "fwd_judge": "중립"
@@ -106,9 +106,9 @@
       "market_cap_b": 1433.6,
       "week52_high": 779.82,
       "week52_low": 520.26,
-      "sector_per": 16.6,
+      "sector_per": 16.5,
       "sector_fwd_per": 16.0,
-      "premium": 15.1,
+      "premium": 15.8,
       "fwd_premium": -1.9,
       "judge": "중립",
       "fwd_judge": "중립"
@@ -124,9 +124,9 @@
       "market_cap_b": 3261.5,
       "week52_high": 408.61,
       "week52_low": 264.22,
-      "sector_per": 16.6,
+      "sector_per": 16.5,
       "sector_fwd_per": 16.0,
-      "premium": -16.3,
+      "premium": -15.8,
       "fwd_premium": 8.1,
       "judge": "중립",
       "fwd_judge": "중립"
@@ -142,9 +142,9 @@
       "market_cap_b": 1453.1,
       "week52_high": 495.0,
       "week52_low": 289.77,
-      "sector_per": 32.2,
+      "sector_per": 31.1,
       "sector_fwd_per": 14.5,
-      "premium": 20.8,
+      "premium": 25.1,
       "fwd_premium": 8.3,
       "judge": "약고평가",
       "fwd_judge": "중립"
@@ -172,15 +172,15 @@
       "name": "넷플릭스",
       "sector": "스트리밍",
       "benchmark": "XLC",
-      "per": 16.9,
+      "per": 16.4,
       "fwd_per": 15.0,
       "price": 56.73,
       "market_cap_b": 233.0,
       "week52_high": 109.73,
       "week52_low": 56.56,
-      "sector_per": 16.6,
+      "sector_per": 16.5,
       "sector_fwd_per": 16.0,
-      "premium": 1.8,
+      "premium": -0.6,
       "fwd_premium": -6.2,
       "judge": "중립",
       "fwd_judge": "중립"
@@ -196,9 +196,9 @@
       "market_cap_b": 702.4,
       "week52_high": 658.52,
       "week52_low": 188.22,
-      "sector_per": 32.2,
+      "sector_per": 31.1,
       "sector_fwd_per": 14.5,
-      "premium": 181.7,
+      "premium": 191.6,
       "fwd_premium": 66.2,
       "judge": "고평가",
       "fwd_judge": "고평가"
@@ -208,15 +208,15 @@
       "name": "오라클",
       "sector": "클라우드DB",
       "benchmark": "IGV",
-      "per": 17.3,
+      "per": 15.9,
       "fwd_per": 9.2,
       "price": 101.19,
       "market_cap_b": 315.5,
       "week52_high": 250.25,
-      "week52_low": 100.2505,
-      "sector_per": 40.0,
+      "week52_low": 100.25,
+      "sector_per": 39.8,
       "sector_fwd_per": 23.2,
-      "premium": -56.8,
+      "premium": -60.1,
       "fwd_premium": -60.3,
       "judge": "역프",
       "fwd_judge": "역프"
@@ -232,9 +232,9 @@
       "market_cap_b": 160.4,
       "week52_high": 259.92,
       "week52_low": 121.99,
-      "sector_per": 32.2,
+      "sector_per": 31.1,
       "sector_fwd_per": 14.5,
-      "premium": -63.4,
+      "premium": -62.1,
       "fwd_premium": -15.2,
       "judge": "역프",
       "fwd_judge": "중립"
@@ -244,15 +244,15 @@
       "name": "마이크론",
       "sector": "메모리반도체",
       "benchmark": "SOXX",
-      "per": 9.3,
+      "per": 8.0,
       "fwd_per": 2.8,
       "price": 594.51,
       "market_cap_b": 672.6,
       "week52_high": 1255.0,
-      "week52_low": 192.59,
-      "sector_per": 32.2,
+      "week52_low": 212.36,
+      "sector_per": 31.1,
       "sector_fwd_per": 14.5,
-      "premium": -71.1,
+      "premium": -74.3,
       "fwd_premium": -80.7,
       "judge": "역프",
       "fwd_judge": "역프"
@@ -262,17 +262,17 @@
       "name": "어플라이드머티리얼즈",
       "sector": "반도체장비",
       "benchmark": "SOXX",
-      "per": 26.9,
+      "per": 24.0,
       "fwd_per": 12.3,
       "price": 302.63,
       "market_cap_b": 240.2,
       "week52_high": 739.67,
-      "week52_low": 215.5,
-      "sector_per": 32.2,
+      "week52_low": 222.86,
+      "sector_per": 31.1,
       "sector_fwd_per": 14.5,
-      "premium": -16.5,
+      "premium": -22.8,
       "fwd_premium": -15.2,
-      "judge": "중립",
+      "judge": "저평가",
       "fwd_judge": "중립"
     },
     {
@@ -285,10 +285,10 @@
       "price": 183.27,
       "market_cap_b": 228.9,
       "week52_high": 438.5,
-      "week52_low": 135.5,
-      "sector_per": 32.2,
+      "week52_low": 144.43,
+      "sector_per": 31.1,
       "sector_fwd_per": 14.5,
-      "premium": -15.2,
+      "premium": -12.2,
       "fwd_premium": 2.8,
       "judge": "중립",
       "fwd_judge": "중립"
@@ -303,10 +303,10 @@
       "price": 126.87,
       "market_cap_b": 165.3,
       "week52_high": 307.37,
-      "week52_low": 107.196,
-      "sector_per": 32.2,
+      "week52_low": 110.3,
+      "sector_per": 31.1,
       "sector_fwd_per": 14.5,
-      "premium": -1.2,
+      "premium": 2.3,
       "fwd_premium": 23.4,
       "judge": "중립",
       "fwd_judge": "약고평가"
@@ -322,9 +322,9 @@
       "market_cap_b": 345.7,
       "week52_high": 212.94,
       "week52_low": 106.37,
-      "sector_per": 40.0,
+      "sector_per": 39.8,
       "sector_fwd_per": 23.2,
-      "premium": 152.5,
+      "premium": 153.8,
       "fwd_premium": 143.5,
       "judge": "고평가",
       "fwd_judge": "고평가"
@@ -334,7 +334,7 @@
       "name": "팔로알토네트웍스",
       "sector": "사이버보안",
       "benchmark": "CIBR",
-      "per": 635.8,
+      "per": 602.3,
       "fwd_per": 69.9,
       "price": 343.32,
       "market_cap_b": 281.9,
@@ -356,11 +356,11 @@
       "fwd_per": 10.0,
       "price": 270.44,
       "market_cap_b": 72.3,
-      "week52_high": 682.27,
+      "week52_high": 681.2,
       "week52_low": 252.84,
-      "sector_per": 40.0,
+      "sector_per": 39.8,
       "sector_fwd_per": 23.2,
-      "premium": -59.0,
+      "premium": -58.8,
       "fwd_premium": -56.9,
       "judge": "역프",
       "fwd_judge": "역프"
@@ -388,15 +388,15 @@
       "name": "텍사스인스트루먼트",
       "sector": "아날로그반도체",
       "benchmark": "SOXX",
-      "per": 37.0,
+      "per": 34.2,
       "fwd_per": 22.7,
       "price": 263.75,
       "market_cap_b": 241.0,
       "week52_high": 334.03,
-      "week52_low": 153.41,
-      "sector_per": 32.2,
+      "week52_low": 158.69,
+      "sector_per": 31.1,
       "sector_fwd_per": 14.5,
-      "premium": 14.9,
+      "premium": 10.0,
       "fwd_premium": 56.6,
       "judge": "중립",
       "fwd_judge": "고평가"
@@ -412,9 +412,9 @@
       "market_cap_b": 357.3,
       "week52_high": 130.37,
       "week52_low": 72.8,
-      "sector_per": 40.0,
+      "sector_per": 39.8,
       "sector_fwd_per": 23.2,
-      "premium": -39.8,
+      "premium": -39.4,
       "fwd_premium": -35.3,
       "judge": "저평가",
       "fwd_judge": "저평가"
@@ -448,9 +448,9 @@
       "market_cap_b": 77.3,
       "week52_high": 416.69,
       "week52_low": 262.75,
-      "sector_per": 40.0,
+      "sector_per": 39.8,
       "sector_fwd_per": 23.2,
-      "premium": 40.0,
+      "premium": 40.7,
       "fwd_premium": 23.3,
       "judge": "약고평가",
       "fwd_judge": "약고평가"
@@ -463,7 +463,7 @@
       "sector": "메모리/HBM",
       "us_ref": "MU",
       "kr_per": null,
-      "us_per": 9.3,
+      "us_per": 8.0,
       "kimpo": null,
       "kr_fwd": 2.3,
       "us_fwd": 2.8,
@@ -478,7 +478,7 @@
       "sector": "메모리/HBM",
       "us_ref": "MU",
       "kr_per": null,
-      "us_per": 9.3,
+      "us_per": 8.0,
       "kimpo": null,
       "kr_fwd": 2.1,
       "us_fwd": 2.8,
@@ -493,7 +493,7 @@
       "sector": "AI 반도체",
       "us_ref": "NVDA",
       "kr_per": null,
-      "us_per": 15.7,
+      "us_per": 13.5,
       "kimpo": null,
       "kr_fwd": 1.5,
       "us_fwd": 7.6,
@@ -598,7 +598,7 @@
       "sector": "은행/금융",
       "us_ref": "JPM",
       "kr_per": null,
-      "us_per": 13.4,
+      "us_per": 13.0,
       "kimpo": null,
       "kr_fwd": 7.6,
       "us_fwd": 12.1,
@@ -628,7 +628,7 @@
       "sector": "바이오/제약",
       "us_ref": "LLY",
       "kr_per": null,
-      "us_per": 43.9,
+      "us_per": 43.7,
       "kimpo": null,
       "kr_fwd": 29.2,
       "us_fwd": 26.5,
@@ -643,7 +643,7 @@
       "sector": "은행/금융",
       "us_ref": "JPM",
       "kr_per": null,
-      "us_per": 13.4,
+      "us_per": 13.0,
       "kimpo": null,
       "kr_fwd": 6.5,
       "us_fwd": 12.1,
@@ -658,11 +658,11 @@
       "sector": "바이오/제약",
       "us_ref": "LLY",
       "kr_per": null,
-      "us_per": 43.9,
+      "us_per": 43.7,
       "kimpo": null,
       "kr_fwd": 26.9,
       "us_fwd": 26.5,
-      "fwd_kimpo": 1.6,
+      "fwd_kimpo": 1.5,
       "judge": "적자/무의미",
       "fwd_judge": "중립",
       "price": 213000.0
@@ -763,11 +763,11 @@
       "sector": "은행/금융",
       "us_ref": "JPM",
       "kr_per": null,
-      "us_per": 13.4,
+      "us_per": 13.0,
       "kimpo": null,
       "kr_fwd": 7.0,
       "us_fwd": 12.1,
-      "fwd_kimpo": -42.4,
+      "fwd_kimpo": -42.2,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 123900.0
@@ -797,7 +797,7 @@
       "kimpo": null,
       "kr_fwd": 12.2,
       "us_fwd": 17.3,
-      "fwd_kimpo": -29.5,
+      "fwd_kimpo": -29.3,
       "judge": "적자/무의미",
       "fwd_judge": "역프",
       "price": 161600.0
@@ -835,12 +835,12 @@
   ],
   "trade": {
     "period": "2026.09 (확정치)",
-    "export_total_usd_bn": null,
-    "export_yoy_pct": null,
+    "export_total_usd_bn": 1212.2,
+    "export_yoy_pct": 84.0,
     "semiconductor_usd_bn": 431.2,
     "semiconductor_yoy_pct": 216.5,
-    "semiconductor_share_pct": null,
-    "trade_balance_usd_bn": 369.2,
+    "semiconductor_share_pct": 35.6,
+    "trade_balance_usd_bn": 410.1,
     "items": [
       {
         "name": "반도체",
@@ -861,6 +861,11 @@
         "name": "가전제품",
         "yoy": -25.4,
         "direction": "down"
+      },
+      {
+        "name": "승용차",
+        "yoy": -5.6,
+        "direction": "down"
       }
     ],
     "countries": [
@@ -877,6 +882,11 @@
       {
         "name": "미국",
         "yoy": 136.9,
+        "direction": "up"
+      },
+      {
+        "name": "베트남",
+        "yoy": 43.9,
         "direction": "up"
       },
       {
@@ -915,6 +925,84 @@
         "pct": 41.7
       }
     ],
-    "source": "customs_api"
+    "source": "customs_api",
+    "semiconductor_history": [
+      {
+        "label": "'23 1Q",
+        "pct": 18.5
+      },
+      {
+        "label": "'23 2Q",
+        "pct": 19.8
+      },
+      {
+        "label": "'23 3Q",
+        "pct": 21.5
+      },
+      {
+        "label": "'23 4Q",
+        "pct": 22.8
+      },
+      {
+        "label": "'24 1Q",
+        "pct": 20.5
+      },
+      {
+        "label": "'24 2Q",
+        "pct": 21.0
+      },
+      {
+        "label": "'24 3Q",
+        "pct": 21.8
+      },
+      {
+        "label": "'24 4Q",
+        "pct": 22.5
+      },
+      {
+        "label": "'25 1Q",
+        "pct": 21.0
+      },
+      {
+        "label": "'25 2Q",
+        "pct": 23.5
+      },
+      {
+        "label": "'25 3Q",
+        "pct": 26.0
+      },
+      {
+        "label": "'25 4Q",
+        "pct": 27.5
+      },
+      {
+        "label": "'26 1Q",
+        "pct": 28.5
+      },
+      {
+        "label": "'26 4월",
+        "pct": 29.4
+      },
+      {
+        "label": "'26 5월",
+        "pct": 41.7
+      },
+      {
+        "label": "'26 6월",
+        "pct": 32.9
+      },
+      {
+        "label": "'26 7월",
+        "pct": 33.0
+      },
+      {
+        "label": "'26 8월",
+        "pct": 38.9
+      },
+      {
+        "label": "'26 9월",
+        "pct": 35.6
+      }
+    ]
   }
 }
